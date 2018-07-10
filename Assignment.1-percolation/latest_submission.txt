@@ -5,23 +5,23 @@ ASSESSMENT SUMMARY
 Compilation:  FAILED (0 errors, 1 warning)
 API:          PASSED
 
-Findbugs:     PASSED
+Findbugs:     FAILED (1 warning)
 PMD:          PASSED
-Checkstyle:   FAILED (0 errors, 1 warning)
+Checkstyle:   FAILED (0 errors, 3 warnings)
 
 Correctness:  30/30 tests passed
 Memory:       8/8 tests passed
-Timing:       18/20 tests passed
+Timing:       20/20 tests passed
 
-Aggregate score: 93.00%
+Aggregate score: 95.00%
 [Compilation: 5%, API: 5%, Findbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
 
 ASSESSMENT DETAILS
 
 The following files were submitted:
 ----------------------------------
-9.3K Jun 20 06:11 Percolation.java
-2.8K Jun 20 06:11 PercolationStats.java
+9.3K Jul 10 03:35 Percolation.java
+3.0K Jul 10 03:35 PercolationStats.java
 
 
 ********************************************************************************
@@ -59,6 +59,8 @@ PercolationStats:
 
 % findbugs *.class
 *-----------------------------------------------------------
+M P SS_SHOULD_BE_STATIC SS: The instance variable 'CONFIDENCE_95' is final and initialized to a compile-time constant. Should it also be static?  At PercolationStats.java:[line 22]
+Warnings generated: 1
 
 
 ================================================================
@@ -66,6 +68,9 @@ PercolationStats:
 
 % pmd .
 *-----------------------------------------------------------
+PercolationStats.java:19: Can you replace the instance (or static) variable 'fractions' with a local variable? [SingularField]
+PercolationStats.java:22: This instance variable should be turned into a class constant by adding the 'static' modifier. [FinalFieldCouldBeStatic]
+PMD ends with 2 warnings.
 
 
 ================================================================
@@ -73,14 +78,16 @@ PercolationStats:
 
 % checkstyle *.java
 *-----------------------------------------------------------
+[WARN] PercolationStats.java:22:26: The instance variable 'CONFIDENCE_95' must start with a lowercase letter and use camelCase. [MemberName]
+[WARN] PercolationStats.java:22:39: '=' is not preceded with whitespace. [WhitespaceAround]
+[WARN] PercolationStats.java:22:40: '=' is not followed by whitespace. [WhitespaceAround]
+Checkstyle ends with 0 errors and 3 warnings.
 
 % custom checkstyle checks for Percolation.java
 *-----------------------------------------------------------
 
 % custom checkstyle checks for PercolationStats.java
 *-----------------------------------------------------------
-[WARN] PercolationStats.java:12:1: The constant '1.96' appears more than once. Define a constant variable (such as 'CONFIDENCE_95') to hold the constant '1.96'. [NumericLiteralCount]
-Checkstyle ends with 0 errors and 1 warning.
 
 
 ================================================================
@@ -367,14 +374,14 @@ Test 1a-1d: check memory usage as a function of T trials for n = 100
 
                  T        bytes
 --------------------------------------------
-=> passed       16          184         
-=> passed       32          312         
-=> passed       64          568         
-=> passed      128         1080         
+=> passed       16          208         
+=> passed       32          336         
+=> passed       64          592         
+=> passed      128         1104         
 ==> 4/4 tests passed
 
 
-Estimated student memory = 8.00 T + 56.00   (R^2 = 1.000)
+Estimated student memory = 8.00 T + 80.00   (R^2 = 1.000)
 
 Total: 4/4 tests passed!
 
@@ -392,42 +399,10 @@ Running 4 total tests.
 
 Test 1: count calls to StdStats.mean() and StdStats.stddev()
   * n =  20, trials =  10
-    - calls StdStats.mean() the wrong number of times
-    - number of student   calls to StdStats.mean() = 3
-    - number of reference calls to StdStats.mean() = 1
-
-    - calls StdStats.stddev() the wrong number of times
-    - number of student   calls to StdStats.stddev() = 3
-    - number of reference calls to StdStats.stddev() = 1
-
   * n =  50, trials =  20
-    - calls StdStats.mean() the wrong number of times
-    - number of student   calls to StdStats.mean() = 3
-    - number of reference calls to StdStats.mean() = 1
-
-    - calls StdStats.stddev() the wrong number of times
-    - number of student   calls to StdStats.stddev() = 3
-    - number of reference calls to StdStats.stddev() = 1
-
   * n = 100, trials =  50
-    - calls StdStats.mean() the wrong number of times
-    - number of student   calls to StdStats.mean() = 3
-    - number of reference calls to StdStats.mean() = 1
-
-    - calls StdStats.stddev() the wrong number of times
-    - number of student   calls to StdStats.stddev() = 3
-    - number of reference calls to StdStats.stddev() = 1
-
   * n =  64, trials = 150
-    - calls StdStats.mean() the wrong number of times
-    - number of student   calls to StdStats.mean() = 3
-    - number of reference calls to StdStats.mean() = 1
-
-    - calls StdStats.stddev() the wrong number of times
-    - number of student   calls to StdStats.stddev() = 3
-    - number of reference calls to StdStats.stddev() = 1
-
-==> FAILED
+==> passed
 
 Test 2: count calls to methods in StdRandom
   * n = 20, trials = 10
@@ -451,16 +426,14 @@ Test 4: Call PercolationStats methods with trials = 3 and values of n that go up
          n  seconds log ratio
      ------------------------
        724     0.22       2.5
-      1024     0.65       3.2
-      1448     1.91       3.1
-      2048     4.27       2.3
-      2896    10.08       2.5
-     [ exceeded the time limit of 10.0 seconds ]
-
-==> FAILED
+      1024     0.50       2.4
+      1448     1.34       2.8
+      2048     3.31       2.6
+      2896     8.32       2.7
+==> passed
 
 
-Total: 2/4 tests passed!
+Total: 4/4 tests passed!
 
 
 ================================================================
@@ -515,13 +488,13 @@ Test 1a-1e: Creates an n-by-n percolation system; open sites at random until
                                        2 * connected()
                  n       union()              + find()        constructor
 -----------------------------------------------------------------------------------
-=> passed       16          301                   276                   2         
-=> passed       32         1383                  1194                   2         
-=> passed       64         6226                  5046                   2         
-=> passed      128        21688                 18838                   2         
-=> passed      256        92052                 77616                   2         
-=> passed      512       369537                311140                   2         
-=> passed     1024      1455893               1235726                   2         
+=> passed       16          365                   312                   2         
+=> passed       32         1311                  1158                   2         
+=> passed       64         5472                  4698                   2         
+=> passed      128        24254                 19968                   2         
+=> passed      256        95401                 79014                   2         
+=> passed      512       358642                306484                   2         
+=> passed     1024      1474998               1244356                   2         
 ==> 7/7 tests passed
 
 
@@ -562,11 +535,11 @@ Test 3: Create an n-by-n percolation system; interleave calls to percolates()
                         log   union-find     log
          n  seconds   ratio   operations   ratio
      -------------------------------------------
-      1024     0.24     3.0      4223272     2.1
-      1448     0.66     2.9      8374158     2.0
-      2048     1.65     2.6     16714200     2.0
-      2896     3.71     2.3     33451626     2.0
-      4096     9.20     2.6     67415310     2.0
+      1024     0.20     2.6      4176420     2.0
+      1448     0.49     2.6      8359210     2.0
+      2048     1.31     2.9     16831816     2.0
+      2896     3.37     2.7     33506538     2.0
+      4096     7.53     2.3     66831040     2.0
 ==> passed
 
 
@@ -579,12 +552,11 @@ Test 4: Create an n-by-n percolation system; interleave calls to open(),
                         log   union-find     log
          n  seconds   ratio   operations   ratio
      -------------------------------------------
-       724     0.11     2.5      2750790     2.0
-      1024     0.29     2.9      5469000     2.0
-      1448     0.75     2.7     10846908     2.0
-      2048     1.66     2.3     21757690     2.0
-      2896     3.80     2.4     43622540     2.0
-      4096     8.42     2.3     87167370     2.0
+      1024     0.18     2.2      5384928     2.0
+      1448     0.52     3.2     10924496     2.0
+      2048     1.44     2.9     21667856     2.0
+      2896     3.60     2.7     43367186     2.0
+      4096     8.64     2.5     87161010     2.0
 ==> passed
 
 
@@ -595,6 +567,3 @@ Total: 16/16 tests passed!
 
 
 
-
-
-20 June 2018 at 1:53 AM

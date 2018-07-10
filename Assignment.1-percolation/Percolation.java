@@ -237,12 +237,10 @@ public class Percolation {
 
     public static void main(String[] args)   // test client (optional)
     {
-        @SuppressWarnings("deprecation")
         int[] whitelist = In.readInts(args[0]);
 
         int size = whitelist[0];
         int dataLength = whitelist.length;
-        System.out.printf("This one is %d", size);
         Percolation testPer = new Percolation(size);
         for (int i = 1; i < dataLength; i += 2)
         {

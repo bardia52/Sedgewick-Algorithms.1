@@ -17,6 +17,9 @@ public class PercolationStats {
 
     private final int numExp;
     private final double[] fractions;
+    private final double allMean;
+    private final double allStd;
+    private final static double confidence95 = 1.96;
 
     /**
      * Performs numTrials independent computational experiments on an N-by-N grid.
@@ -42,34 +45,36 @@ public class PercolationStats {
             double fraction = (double) openedSites / (numExperiments * numExperiments);
             fractions[expNum] = fraction;
         }
+        allMean = StdStats.mean(fractions);
+        allStd = StdStats.stddev(fractions);
     }
 
     /**
      * Sample mean of percolation threshold.
      */
     public double mean() {
-        return StdStats.mean(fractions);
+        return allMean;
     }
 
     /**
      * Sample standard deviation of percolation threshold.
      */
     public double stddev() {
-        return StdStats.stddev(fractions);
+        return allStd;
     }
 
     /**
      * Returns lower bound of the 95% confidence interval.
      */
     public double confidenceLo() {
-        return mean() - ((1.96 * stddev()) / Math.sqrt(numExp));
+        return allMean - ((confidence95 * allStd) / Math.sqrt(numExp));
     }
 
     /**
      * Returns upper bound of the 95% confidence interval.
      */
     public double confidenceHi() {
-        return mean() + ((1.96 * stddev()) / Math.sqrt(numExp));
+        return allMean + ((confidence95 * allStd) / Math.sqrt(numExp));
     }
 
     public static void main(String[] args) {
