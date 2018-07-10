@@ -16,10 +16,9 @@ import edu.princeton.cs.algs4.StdOut;
 public class PercolationStats {
 
     private final int numExp;
-    private final double[] fractions;
     private final double allMean;
     private final double allStd;
-    private final static double confidence95 = 1.96;
+    private static final double confidence95 = 1.96;
 
     /**
      * Performs numTrials independent computational experiments on an N-by-N grid.
@@ -30,7 +29,7 @@ public class PercolationStats {
             +"|| numTrials <= 0");
         }
         numExp = numTrials;
-        fractions = new double[numExp];
+        double[] fractions = new double[numExp];
         for (int expNum = 0; expNum < numExp; expNum++) {
             Percolation perc = new Percolation(numExperiments);
             int openedSites = 0;

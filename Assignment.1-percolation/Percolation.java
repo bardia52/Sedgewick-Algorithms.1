@@ -237,7 +237,8 @@ public class Percolation {
 
     public static void main(String[] args)   // test client (optional)
     {
-        int[] whitelist = In.readInts(args[0]);
+    	In inputText = new In(args[0]);
+        int[] whitelist = inputText.readAllInts();
 
         int size = whitelist[0];
         int dataLength = whitelist.length;
