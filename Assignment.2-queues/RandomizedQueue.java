@@ -42,7 +42,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     /** Adds a new item to the queue. */
     public void enqueue(Item item) {
         if (item == null) {
-            throw new NullPointerException("Cannot enqueue null objects.");
+            throw new IllegalArgumentException("Cannot enqueue null objects.");
         }
         
         if (this.size == queue.length) {
@@ -113,7 +113,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     
     private class ListIterator implements Iterator<Item> {
         
-        private Item[] iteratorQueue;
+        private final Item[] iteratorQueue;
         private int iteratorIndex = 0;
         
         public ListIterator(Item[] queue, int size) {

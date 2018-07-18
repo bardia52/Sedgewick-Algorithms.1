@@ -9,20 +9,20 @@ Findbugs:     PASSED
 PMD:          PASSED
 Checkstyle:   PASSED
 
-Correctness:  42/43 tests passed
+Correctness:  43/43 tests passed
 Memory:       105/105 tests passed
 Timing:       136/136 tests passed
 
-Aggregate score: 98.60%
+Aggregate score: 100.00%
 [Compilation: 5%, API: 5%, Findbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
 
 ASSESSMENT DETAILS
 
 The following files were submitted:
 ----------------------------------
-4.8K Jul 18 02:39 Deque.java
- 852 Jul 18 02:39 Permutation.java
-4.8K Jul 18 02:39 RandomizedQueue.java
+4.8K Jul 18 03:56 Deque.java
+ 852 Jul 18 03:56 Permutation.java
+4.8K Jul 18 03:56 RandomizedQueue.java
 
 
 ********************************************************************************
@@ -97,8 +97,6 @@ Permutation:
 
 % pmd .
 *-----------------------------------------------------------
-RandomizedQueue.java:116: The private instance (or static) variable 'iteratorQueue' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
-PMD ends with 1 warning.
 
 
 ================================================================
@@ -352,11 +350,7 @@ Test 15: check randomness of iterator() by enqueueing n items, iterating over th
 ==> passed
 
 Test 16: call enqueue() with a null argument
-    - throws wrong exception when calling enqueue() with a null argument
-    - throws a java.lang.NullPointerException
-    - should throw a java.lang.IllegalArgumentException
-
-==> FAILED
+==> passed
 
 Test 17: check that remove() and next() throw the specified exceptions in iterator()
 ==> passed
@@ -365,7 +359,7 @@ Test 18: call iterator() when randomized queue is empty
 ==> passed
 
 
-Total: 17/18 tests passed!
+Total: 18/18 tests passed!
 
 
 ================================================================
@@ -382,21 +376,21 @@ Running 9 total tests.
 
 Test 1a: check formatting for sample inputs from assignment specification
   % java Permutation 3 < distinct.txt
-  F
-  B
   I
+  E
+  A
 
   % java Permutation 3 < distinct.txt
-  G
-  C
+  A
   F
+  C
 
   % java Permutation 8 < duplicates.txt
+  BB
+  BB
+  CC
   CC
   AA
-  BB
-  CC
-  BB
   BB
   BB
   BB
@@ -406,11 +400,11 @@ Test 1a: check formatting for sample inputs from assignment specification
 Test 1b: check formatting for other inputs
   % java Permutation 8 < mediumTale.txt
   was
+  it
   of
-  worst
-  of
+  age
   was
-  foolishness
+  was
   the
   the
 
@@ -521,13 +515,13 @@ Test 4: Time main() with k = 5, for inputs containing n random strings
 => passed        1000     0.00
 => passed        2000     0.00
 => passed        4000     0.00
-=> passed        8000     0.00
+=> passed        8000     0.01
 => passed       16000     0.01
 => passed       32000     0.01
-=> passed       64000     0.03
-=> passed      128000     0.06
+=> passed       64000     0.02
+=> passed      128000     0.05
 => passed      256000     0.24
-=> passed      512000     0.30
+=> passed      512000     0.29
 ==> 10/10 tests passed
 
 
@@ -538,13 +532,13 @@ Test 5: Time main() with k = 1000, for inputs containing n random strings
 => passed        1000     0.00
 => passed        2000     0.00
 => passed        4000     0.00
-=> passed        8000     0.00
+=> passed        8000     0.01
 => passed       16000     0.01
 => passed       32000     0.01
 => passed       64000     0.02
 => passed      128000     0.05
 => passed      256000     0.09
-=> passed      512000     0.19
+=> passed      512000     0.18
 ==> 10/10 tests passed
 
 
@@ -966,10 +960,10 @@ Test 2a-2g: make n random calls to addLast(), removeLast(), isEmpty(), and size(
 => passed       16384     0.00
 => passed       32768     0.00
 => passed       65536     0.00
-=> passed      128000     0.02
+=> passed      128000     0.00
 => passed      256000     0.01
 => passed      512000     0.02
-=> passed     1024000     0.04
+=> passed     1024000     0.03
 => passed     2048000     0.07
 ==> 12/12 tests passed
 
@@ -1009,7 +1003,7 @@ Test 4a-4g: make n calls to addFirst(); iterate over the n items by calling
 => passed      128000     0.01
 => passed      256000     0.02
 => passed      512000     0.04
-=> passed     1024000     0.03
+=> passed     1024000     0.01
 => passed     2048000     0.03
 ==> 12/12 tests passed
 
@@ -1071,9 +1065,9 @@ Test 4a-g: make n random calls to enqueue(), sample(), dequeue(), isEmpty(),
 => passed        8192     0.00
 => passed       16384     0.00
 => passed       32768     0.00
-=> passed       65536     0.01
+=> passed       65536     0.00
 => passed      128000     0.01
-=> passed      256000     0.02
+=> passed      256000     0.01
 => passed      512000     0.02
 => passed     1024000     0.05
 => passed     2048000     0.09
@@ -1094,9 +1088,9 @@ Test 5a-g: make n random calls to enqueue(), sample(), dequeue(), isEmpty(),
 => passed       65536     0.00
 => passed      128000     0.01
 => passed      256000     0.02
-=> passed      512000     0.04
+=> passed      512000     0.03
 => passed     1024000     0.07
-=> passed     2048000     0.15
+=> passed     2048000     0.16
 ==> 12/12 tests passed
 
 
