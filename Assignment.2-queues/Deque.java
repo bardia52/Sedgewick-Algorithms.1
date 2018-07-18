@@ -42,7 +42,7 @@ public class Deque<Item> implements Iterable<Item> {
     {
         if (item == null)
         {
-            throw new NullPointerException("Cannot add null items");
+            throw new IllegalArgumentException("Cannot add null items");
         }
 
         // Create a new node
@@ -71,7 +71,7 @@ public class Deque<Item> implements Iterable<Item> {
     {
         if (item == null)
         {
-            throw new NullPointerException("Cannot add null items");
+            throw new IllegalArgumentException("Cannot add null items");
         }
 
         // Create a new node

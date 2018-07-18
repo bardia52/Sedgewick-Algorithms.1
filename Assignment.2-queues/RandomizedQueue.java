@@ -120,12 +120,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             
             iteratorQueue = (Item[]) new Object[size];
             
-            //Copy items into iterator queue
+            // Copy items into iterator queue
             for (int i = 0; i < iteratorQueue.length; i++) {
                 iteratorQueue[i] = queue[i];
             }
             
-            //Knuth shuffle the iterator queue
+            // Knuth shuffle the iterator queue
             for (int j = 1; j < iteratorQueue.length; j++) {
                 int swapIndex = StdRandom.uniform(j + 1);
                 

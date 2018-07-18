@@ -7,22 +7,22 @@ API:          PASSED
 
 Findbugs:     PASSED
 PMD:          PASSED
-Checkstyle:   FAILED (0 errors, 2 warnings)
+Checkstyle:   PASSED
 
-Correctness:  41/43 tests passed
+Correctness:  42/43 tests passed
 Memory:       105/105 tests passed
 Timing:       136/136 tests passed
 
-Aggregate score: 97.21%
+Aggregate score: 98.60%
 [Compilation: 5%, API: 5%, Findbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
 
 ASSESSMENT DETAILS
 
 The following files were submitted:
 ----------------------------------
-4.8K Mar  4 23:56 Deque.java
- 852 Mar  4 23:56 Permutation.java
-4.8K Mar  4 23:56 RandomizedQueue.java
+4.8K Jul 18 02:39 Deque.java
+ 852 Jul 18 02:39 Permutation.java
+4.8K Jul 18 02:39 RandomizedQueue.java
 
 
 ********************************************************************************
@@ -106,9 +106,6 @@ PMD ends with 1 warning.
 
 % checkstyle *.java
 *-----------------------------------------------------------
-[WARN] RandomizedQueue.java:123:15: '//' or '/*' is not followed by whitespace. [WhitespaceAfter]
-[WARN] RandomizedQueue.java:128:15: '//' or '/*' is not followed by whitespace. [WhitespaceAfter]
-Checkstyle ends with 0 errors and 2 warnings.
 
 % custom checkstyle checks for Deque.java
 *-----------------------------------------------------------
@@ -231,15 +228,7 @@ Test 13: create Deque objects of different parameterized types
 ==> passed
 
 Test 14: call addFirst() and addLast() with null argument
-    - throws wrong exception when calling addFirst() with a null argument
-    - throws a java.lang.NullPointerException
-    - should throw a java.lang.IllegalArgumentException
-
-    - throws wrong exception when calling addLast() with a null argument
-    - throws a java.lang.NullPointerException
-    - should throw a java.lang.IllegalArgumentException
-
-==> FAILED
+==> passed
 
 Test 15: check that remove() and next() throw the specified exceptions in iterator()
 ==> passed
@@ -248,7 +237,7 @@ Test 16: call iterator() when the deque is empty
 ==> passed
 
 
-Total: 15/16 tests passed!
+Total: 16/16 tests passed!
 
 
 ================================================================
@@ -393,37 +382,37 @@ Running 9 total tests.
 
 Test 1a: check formatting for sample inputs from assignment specification
   % java Permutation 3 < distinct.txt
+  F
   B
   I
-  G
 
   % java Permutation 3 < distinct.txt
-  A
-  D
-  E
+  G
+  C
+  F
 
   % java Permutation 8 < duplicates.txt
-  BB
   CC
-  BB
-  BB
-  BB
   AA
   BB
   CC
+  BB
+  BB
+  BB
+  BB
 
 ==> passed
 
 Test 1b: check formatting for other inputs
   % java Permutation 8 < mediumTale.txt
+  was
+  of
+  worst
   of
   was
+  foolishness
   the
-  wisdom
-  of
-  age
-  worst
-  best
+  the
 
   % java Permutation 0 < distinct.txt
   [no output]
@@ -536,9 +525,9 @@ Test 4: Time main() with k = 5, for inputs containing n random strings
 => passed       16000     0.01
 => passed       32000     0.01
 => passed       64000     0.03
-=> passed      128000     0.05
-=> passed      256000     0.28
-=> passed      512000     0.42
+=> passed      128000     0.06
+=> passed      256000     0.24
+=> passed      512000     0.30
 ==> 10/10 tests passed
 
 
@@ -977,10 +966,10 @@ Test 2a-2g: make n random calls to addLast(), removeLast(), isEmpty(), and size(
 => passed       16384     0.00
 => passed       32768     0.00
 => passed       65536     0.00
-=> passed      128000     0.01
+=> passed      128000     0.02
 => passed      256000     0.01
 => passed      512000     0.02
-=> passed     1024000     0.03
+=> passed     1024000     0.04
 => passed     2048000     0.07
 ==> 12/12 tests passed
 
@@ -997,7 +986,7 @@ Test 3a-3g: make n random calls to addFirst(), addLast(), removeFirst(), removeL
 => passed       16384     0.00
 => passed       32768     0.00
 => passed       65536     0.00
-=> passed      128000     0.01
+=> passed      128000     0.00
 => passed      256000     0.01
 => passed      512000     0.02
 => passed     1024000     0.04
@@ -1020,7 +1009,7 @@ Test 4a-4g: make n calls to addFirst(); iterate over the n items by calling
 => passed      128000     0.01
 => passed      256000     0.02
 => passed      512000     0.04
-=> passed     1024000     0.02
+=> passed     1024000     0.03
 => passed     2048000     0.03
 ==> 12/12 tests passed
 
@@ -1082,9 +1071,9 @@ Test 4a-g: make n random calls to enqueue(), sample(), dequeue(), isEmpty(),
 => passed        8192     0.00
 => passed       16384     0.00
 => passed       32768     0.00
-=> passed       65536     0.00
+=> passed       65536     0.01
 => passed      128000     0.01
-=> passed      256000     0.01
+=> passed      256000     0.02
 => passed      512000     0.02
 => passed     1024000     0.05
 => passed     2048000     0.09
@@ -1146,7 +1135,7 @@ Test 7a-g: make n calls to enqueue(); iterate over the n items
 => passed      128000     0.01
 => passed      256000     0.02
 => passed      512000     0.04
-=> passed     1024000     0.05
+=> passed     1024000     0.06
 => passed     2048000     0.11
 ==> 12/12 tests passed
 
