@@ -21,7 +21,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private Item[] queue;
     private int size;
 
-    /** Constructor to create a new randomised queue. */
+    /** Constructor to create a new randomized queue. */
     public RandomizedQueue() {
         int defaultSize = 1;
         
