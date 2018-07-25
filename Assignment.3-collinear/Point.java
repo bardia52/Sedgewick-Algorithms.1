@@ -62,17 +62,23 @@ public class Point implements Comparable<Point> {
      * @return the slope between this point and the specified point
      */
     public double slopeTo(Point that) {
+    	if (that == null) {
+    		throw new NullPointerException();
+    	}
         double slope = +0.0;
-        if (this.compareTo(that) == 0)
-        {
+        // (x0, y0) and (x1, y1) are equal
+        if (this.compareTo(that) == 0) {
             slope = Double.NEGATIVE_INFINITY;
         }
-        else if (this.x == that.x)
-        {
+        // The line segment is vertical
+        else if (this.x == that.x) {
             slope = Double.POSITIVE_INFINITY;
         }
-        else
-        {
+        // The line segment is horizontal
+        else if (this.y == that.y) {
+        	slope = +0.0;
+        }
+        else {
             slope = ((double) ((this.y - that.y))) / ((double) (this.x - that.x));
         }
         return slope;
@@ -96,6 +102,8 @@ public class Point implements Comparable<Point> {
         if (that == null) {
             throw new NullPointerException();
         }
+
+        // First compare y, for tie-breaker compare x
         if (this.y < that.y)
         {
             result = -1;
