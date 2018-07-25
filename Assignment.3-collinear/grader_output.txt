@@ -7,7 +7,7 @@ API:          PASSED
 
 Findbugs:     PASSED
 PMD:          PASSED
-Checkstyle:   FAILED (0 errors, 2 warnings)
+Checkstyle:   FAILED (0 errors, 1 warning)
 
 Correctness:  33/41 tests passed
 Memory:       1/1 tests passed
@@ -20,9 +20,9 @@ ASSESSMENT DETAILS
 
 The following files were submitted:
 ----------------------------------
-2.5K Jul 25 03:41 BruteCollinearPoints.java
-3.3K Jul 25 03:41 FastCollinearPoints.java
-5.0K Jul 25 03:41 Point.java
+2.5K Jul 25 03:55 BruteCollinearPoints.java
+3.3K Jul 25 03:55 FastCollinearPoints.java
+5.1K Jul 25 03:55 Point.java
 
 
 ********************************************************************************
@@ -75,8 +75,6 @@ FastCollinearPoints:
 
 % checkstyle *.java
 *-----------------------------------------------------------
-[WARN] Point.java:65:5: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
-Checkstyle ends with 0 errors and 1 warning.
 
 % custom checkstyle checks for Point.java
 *-----------------------------------------------------------
@@ -206,54 +204,54 @@ Test 3b: random vertical line segments
   *  1 random vertical line segment
     - number of entries in student   solution: 0
     - number of entries in reference solution: 1
-    - 1 missing entry in student solution: '(19556, 11894) -> (19556, 13434) -> (19556, 14078) -> (19556, 19282)'
+    - 1 missing entry in student solution: '(18413, 14540) -> (18413, 15036) -> (18413, 17651) -> (18413, 18644)'
 
     - failed on trial 1 of 500
      4
-     19556 19282
-     19556 14078
-     19556 11894
-     19556 13434
+     18413 15036
+     18413 17651
+     18413 18644
+     18413 14540
 
   *  5 random vertical line segments
     - number of entries in student   solution: 0
     - number of entries in reference solution: 5
-    - 5 missing entries in student solution, including: '(4069, 7099) -> (4069, 9245) -> (4069, 10228) -> (4069, 14790)'
+    - 5 missing entries in student solution, including: '(17023, 9349) -> (17023, 12513) -> (17023, 13314) -> (17023, 18102)'
 
     - failed on trial 1 of 250
      20
-      2487 18654
-     12443 15546
-     13094  5655
-      3858  4660
-     13094 10601
-      4069 14790
-     13094  1174
-     12443  9474
-     12443  2335
-      3858  6825
-      3858 10277
-      2487 17726
-      3858 12069
-      4069  9245
-      4069 10228
-     13094  6360
-      2487  6557
-      4069  7099
-      2487  6911
-     12443 17945
+      2900  9556
+     17023 12513
+      9536  9018
+      9536  5360
+      2900  2163
+      6720  2953
+      6720  6966
+      6720 11594
+     17023 13314
+     10986  9642
+      6720 18317
+     17023  9349
+     17023 18102
+      2900  3596
+      9536 15524
+     10986  5944
+      9536 10786
+      2900  8994
+     10986  5007
+     10986 15210
 
   * 10 random vertical line segments
     - number of entries in student   solution: 0
     - number of entries in reference solution: 10
-    - 10 missing entries in student solution, including: '(20577, 9478) -> (20577, 14884) -> (20577, 18543) -> (20577, 19482)'
+    - 10 missing entries in student solution, including: '(14785, 11729) -> (14785, 16494) -> (14785, 16909) -> (14785, 19724)'
 
     - failed on trial 1 of 50
 
   * 15 random vertical line segments
     - number of entries in student   solution: 0
     - number of entries in reference solution: 15
-    - 15 missing entries in student solution, including: '(11801, 16082) -> (11801, 16648) -> (11801, 17730) -> (11801, 19414)'
+    - 15 missing entries in student solution, including: '(12123, 15725) -> (12123, 16838) -> (12123, 18586) -> (12123, 19661)'
 
     - failed on trial 1 of 5
 
@@ -324,54 +322,54 @@ Test 9: random line segments
   *  1 random line segment
     - number of entries in student   solution: 0
     - number of entries in reference solution: 1
-    - 1 missing entry in student solution: '(10059, 5440) -> (10059, 5680) -> (10059, 5870) -> (10059, 6310)'
+    - 1 missing entry in student solution: '(8419, 8010) -> (8419, 8400) -> (8419, 8725) -> (8419, 9141)'
 
     - failed on trial 1 of 500
      4
-     10059  5680
-     10059  5440
-     10059  6310
-     10059  5870
+      8419  9141
+      8419  8725
+      8419  8010
+      8419  8400
 
   *  5 random line segments
     - number of entries in student   solution: 4
     - number of entries in reference solution: 5
-    - 1 missing entry in student solution: '(6363, 4630) -> (6363, 5386) -> (6363, 5467) -> (6363, 6466)'
+    - 1 missing entry in student solution: '(12224, 7463) -> (12224, 8300) -> (12224, 8579) -> (12224, 9013)'
 
-    - failed on trial 2 of 250
+    - failed on trial 3 of 250
      20
-      5505  5718
-      3405  5368
-      6363  6466
-      3472  7954
-     10679  8113
-      3841  8368
-      7378  9889
-      6363  5467
-      1965  5128
-      8411  8113
-      6506 11358
-      6363  4630
-      7196  8113
-      2625  5238
-      3983  9119
-      6363  5386
-     10482 10593
-      3110  8921
-      9221  8113
-      5604 10346
+     12206  5651
+     12224  9013
+     12224  8579
+     13973 13852
+       500  4787
+      7318  1157
+     13919 13852
+       311  4574
+     14105 13852
+     12340  6017
+     12464  6137
+     12224  7463
+      9686  3516
+     12224  8300
+      7094  1320
+      9470  3333
+      5099  9970
+     11596  5297
+      3461  8124
+     14255 13852
 
   * 10 random line segments
     - number of entries in student   solution: 9
     - number of entries in reference solution: 10
-    - 1 missing entry in student solution: '(9849, 13253) -> (9849, 13637) -> (9849, 13733) -> (9849, 13981)'
+    - 1 missing entry in student solution: '(11837, 11950) -> (11837, 11992) -> (11837, 12048) -> (11837, 12181)'
 
     - failed on trial 1 of 100
 
   * 15 random line segments
-    - number of entries in student   solution: 11
+    - number of entries in student   solution: 13
     - number of entries in reference solution: 15
-    - 4 missing entries in student solution, including: '(5186, 8971) -> (5186, 9634) -> (5186, 9907) -> (5186, 11077)'
+    - 2 missing entries in student solution, including: '(12016, 11208) -> (12016, 11702) -> (12016, 11936) -> (12016, 13314)'
 
     - failed on trial 1 of 50
 
@@ -411,16 +409,16 @@ Test 13: throws an exception if either the constructor argument is null
     - constructor throws a java.lang.NullPointerException
     - constructor should throw a java.lang.IllegalArgumentException
      10
+     31530 21149
+     11550  9730
+     12535 13542
      null
-     27493  3293
-     22280 21079
-     27366 27737
-     22901 16835
-     13038 24834
-      2800 13398
-     14464 13805
-      5688 21782
-     27494 23261
+      7659  7949
+     26022 32376
+     19060 28433
+      3187 30672
+     14880 24014
+      6239 26939
 
   * Point[] of length 10, number of null entries = 10
     - constructor throws wrong exception
@@ -443,27 +441,27 @@ Test 13: throws an exception if either the constructor argument is null
     - constructor throws a java.lang.NullPointerException
     - constructor should throw a java.lang.IllegalArgumentException
      4
-      2526 12849
-     12370 13145
+     31918  1844
+     20736  3945
      null
-     18597 15566
+     18786  2449
 
   * Point[] of length 3, number of null entries = 1
     - constructor throws wrong exception
     - constructor throws a java.lang.NullPointerException
     - constructor should throw a java.lang.IllegalArgumentException
      3
-     28437 16189
-     15657  5364
      null
+     32147 21848
+     15451 20915
 
   * Point[] of length 2, number of null entries = 1
     - constructor throws wrong exception
     - constructor throws a java.lang.NullPointerException
     - constructor should throw a java.lang.IllegalArgumentException
      2
-       449 28148
      null
+      4360 28324
 
   * Point[] of length 1, number of null entries = 1
     - constructor fails to throw an exception
@@ -653,16 +651,16 @@ Test 16: throws an exception if either constructor argument is null
     - constructor throws a java.lang.NullPointerException
     - constructor should throw a java.lang.IllegalArgumentException
      10
-     11809   683
-     19990  7956
-      2366 19257
-     28038 14749
-     20627 31605
-     19035 12154
+     29767 30844
+     20555 11090
+     23647 32440
      null
-      6963  2198
-      7612 26587
-     24539 15455
+       453 16747
+     12263 31956
+     19634 22654
+     17392  3627
+     20163 24361
+     18687 15371
 
   * Point[] of length 10, number of null entries = 10
     - constructor throws wrong exception
@@ -685,9 +683,9 @@ Test 16: throws an exception if either constructor argument is null
     - constructor throws a java.lang.NullPointerException
     - constructor should throw a java.lang.IllegalArgumentException
      4
-     27399 18403
-       715 18087
-     11970 17787
+     15517 18604
+     27175  8997
+      5689   921
      null
 
   * Point[] of length 3, number of null entries = 1
@@ -695,17 +693,17 @@ Test 16: throws an exception if either constructor argument is null
     - constructor throws a java.lang.NullPointerException
     - constructor should throw a java.lang.IllegalArgumentException
      3
-      1396  5789
      null
-     19022 21105
+     25708 28486
+     18514 32622
 
   * Point[] of length 2, number of null entries = 1
     - constructor throws wrong exception
     - constructor throws a java.lang.NullPointerException
     - constructor should throw a java.lang.IllegalArgumentException
      2
-     10272  7932
      null
+     32716  3468
 
   * Point[] of length 1, number of null entries = 1
     - constructor fails to throw an exception
@@ -760,11 +758,11 @@ Test 1a-1e: Find collinear points among n random distinct points
                                                       slopeTo()
              n    time     slopeTo()   compare()  + 2*compare()        compareTo()
 -----------------------------------------------------------------------------------------------
-=> passed    16   0.00        3640           0           3640                  167         
-=> passed    32   0.00       71920           0          71920                  618         
-=> passed    64   0.02     1270752           0        1270752                 2314         
-=> passed   128   0.02    21336000           0       21336000                 8862         
-=> passed   256   0.46   349585280           0      349585280                34373         
+=> passed    16   0.00        3640           0           3640                  163         
+=> passed    32   0.00       71920           0          71920                  613         
+=> passed    64   0.02     1270752           0        1270752                 2324         
+=> passed   128   0.10    21336000           0       21336000                 8861         
+=> passed   256   0.30   349585280           0      349585280                34366         
 ==> 5/5 tests passed
 
 Test 2a-2e: Find collinear points among n/4 arbitrary line segments
@@ -773,11 +771,11 @@ Test 2a-2e: Find collinear points among n/4 arbitrary line segments
                                                       slopeTo()
              n    time     slopeTo()   compare()  + 2*compare()        compareTo()
 -----------------------------------------------------------------------------------------------
-=> passed    16   0.00        3794           0           3794                  167         
-=> passed    32   0.00       72666           0          72666                  619         
-=> passed    64   0.01     1273596           0        1273596                 2326         
-=> passed   128   0.13    21347138           0       21347138                 8872         
-=> passed   256   2.11   349635574           0      349635574                34357         
+=> passed    16   0.00        3804           0           3804                  164         
+=> passed    32   0.00       72676           0          72676                  616         
+=> passed    64   0.01     1273674           0        1273674                 2328         
+=> passed   128   0.13    21347476           0       21347476                 8867         
+=> passed   256   2.14   349632398           0      349632398                34359         
 ==> 5/5 tests passed
 
 Total: 10/10 tests passed!
@@ -797,15 +795,15 @@ Test 1a-1g: Find collinear points among n random distinct points
                                                       slopeTo()
              n    time     slopeTo()   compare()  + 2*compare()        compareTo()
 -----------------------------------------------------------------------------------------------
-=> passed    64   0.01        7564       17704          42972                17963         
-=> passed   128   0.01       31500       87102         205704                86961         
-=> passed   256   0.10      128524      409265         947054               409881         
-=> passed   512   0.27      519180     1885983        4291146              1885754         
-=> passed  1024   0.41     2086924     8521990       19130904              8522694         
-=> passed  2048   1.50     8368140    38146675       84661490             38247422         
+=> passed    64   0.01        7564       17801          43166                17989         
+=> passed   128   0.01       31500       87422         206344                87537         
+=> passed   256   0.10      128524      409859         948242               412098         
+=> passed   512   0.29      519180     1885220        4289620              1882397         
+=> passed  1024   0.45     2086924     8511552       19110028              8537840         
+=> passed  2048   1.47     8368140    38046294       84460728             38081275         
 ==> 6/6 tests passed
 
-lg ratio(slopeTo() + 2*compare()) = lg (84661490 / 19130904) = 2.15
+lg ratio(slopeTo() + 2*compare()) = lg (84460728 / 19110028) = 2.14
 => passed
 
 ==> 7/7 tests passed
@@ -815,13 +813,13 @@ Test 2a-2g: Find collinear points among the n points on an n-by-1 grid
                                                       slopeTo()
              n    time     slopeTo()   compare()  + 2*compare()        compareTo()
 -----------------------------------------------------------------------------------------------
-=> passed    64   0.00        7564        4566          16696                 6823         
-=> passed   128   0.00       31500       17406          66312                22679         
-=> passed   256   0.00      128524       67943         264410                79385         
-=> passed   512   0.01      519180      267857        1054894               291914         
-=> passed  1024   0.04     2086924     1061948        4210820              1111696         
-=> passed  2048   0.10     8368140     4225064       16818268              4327351         
-=> passed  4096   0.33    33513484    16846869       67207222             17056157         
+=> passed    64   0.00        7564        4566          16696                 6816         
+=> passed   128   0.00       31500       17406          66312                22682         
+=> passed   256   0.00      128524       67943         264410                79401         
+=> passed   512   0.01      519180      267857        1054894               291887         
+=> passed  1024   0.04     2086924     1061948        4210820              1111721         
+=> passed  2048   0.10     8368140     4225064       16818268              4327310         
+=> passed  4096   0.35    33513484    16846869       67207222             17056101         
 ==> 7/7 tests passed
 
 lg ratio(slopeTo() + 2*compare()) = lg (67207222 / 16818268) = 2.00
@@ -834,13 +832,13 @@ Test 3a-3g: Find collinear points among the n points on an n/4-by-4 grid
                                                       slopeTo()
              n    time     slopeTo()   compare()  + 2*compare()        compareTo()
 -----------------------------------------------------------------------------------------------
-=> passed    64   0.00        7564       14386          36336                16309         
-=> passed   128   0.01       31500       42920         117340                62777         
-=> passed   256   0.01      128524      147881         424286               241916         
-=> passed   512   0.02      519180      544828        1608836               938829         
-=> passed  1024   0.09     2086924     2081014        6248952              3677716         
-=> passed  2048   0.29     8368140     8109673       24587486             14490490         
-=> passed  4096   1.22    33513484    31965619       97444722             57411732         
+=> passed    64   0.00        7564       14386          36336                16319         
+=> passed   128   0.00       31500       42920         117340                62784         
+=> passed   256   0.01      128524      147881         424286               241917         
+=> passed   512   0.03      519180      544828        1608836               938799         
+=> passed  1024   0.09     2086924     2081014        6248952              3677719         
+=> passed  2048   0.30     8368140     8109673       24587486             14490471         
+=> passed  4096   1.35    33513484    31965619       97444722             57411674         
 ==> 7/7 tests passed
 
 lg ratio(slopeTo() + 2*compare()) = lg (97444722 / 24587486) = 1.99
@@ -853,13 +851,13 @@ Test 4a-4g: Find collinear points among the n points on an n/8-by-8 grid
                                                       slopeTo()
              n    time     slopeTo()   compare()  + 2*compare()        compareTo()
 -----------------------------------------------------------------------------------------------
-=> passed    64   0.00        7564       17251          42066                18240         
-=> passed   128   0.00       31500       74449         180398                83715         
-=> passed   256   0.01      128524      229652         587828               336955         
-=> passed   512   0.04      519180      849527        2218234              1334390         
-=> passed  1024   0.12     2086924     3251178        8589280              5303608         
-=> passed  2048   0.48     8368140    12679845       33727830             21141590         
-=> passed  4096   1.81    33513484    50004769      133523022             84303923         
+=> passed    64   0.00        7564       17251          42066                18237         
+=> passed   128   0.00       31500       74449         180398                83721         
+=> passed   256   0.01      128524      229652         587828               336939         
+=> passed   512   0.04      519180      849527        2218234              1334397         
+=> passed  1024   0.13     2086924     3251178        8589280              5303557         
+=> passed  2048   0.60     8368140    12679845       33727830             21141612         
+=> passed  4096   1.96    33513484    50004769      133523022             84303937         
 ==> 7/7 tests passed
 
 lg ratio(slopeTo() + 2*compare()) = lg (133523022 / 33727830) = 1.99
