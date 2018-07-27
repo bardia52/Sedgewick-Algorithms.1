@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 public class BruteCollinearPoints {
 
+    private static final double EPSILON = 0.0000001;
     private final LineSegment[] segments;
 
     // finds all line segments containing 4 points
@@ -39,7 +40,7 @@ public class BruteCollinearPoints {
                         double pqSlope = pointsCopy[p].slopeTo(pointsCopy[q]);
                         double prSlope = pointsCopy[p].slopeTo(pointsCopy[r]);
                         double psSlope = pointsCopy[p].slopeTo(pointsCopy[s]);
-                        if ((pqSlope == prSlope) && (pqSlope == psSlope)) {
+                        if (equals(pqSlope, prSlope) && equals(pqSlope, psSlope)) {
                             foundSegments.add(new LineSegment(pointsCopy[p], pointsCopy[s]));
                         }
                     }
@@ -60,6 +61,17 @@ public class BruteCollinearPoints {
     public LineSegment[] segments()
     {
         return Arrays.copyOf(segments, numberOfSegments());
+    }
+
+    private boolean equals(double a, double b) {
+        // Corner cases
+        if (((a == Double.NEGATIVE_INFINITY) && (b == Double.NEGATIVE_INFINITY)) ||
+            ((a == Double.POSITIVE_INFINITY) && (b == Double.POSITIVE_INFINITY))) {
+            return true;
+        }
+        else {
+            return (Math.abs(a - b) < EPSILON);
+        }
     }
 
     private void checkNullEntries(Point[] points) {

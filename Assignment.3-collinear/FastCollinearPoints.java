@@ -39,7 +39,6 @@ public class FastCollinearPoints {
             int last = 2;
             int first = 1;
             int p = 0;
-            // for (int p = 0, first = 1, last = 2; last < jCopy.length; last++)
             while (last < jCopy.length)
             {
                 while ((last < jCopy.length) && 
@@ -48,13 +47,6 @@ public class FastCollinearPoints {
                 {
                     last++;
                 }
-                //  find last collinear to p point
-                // while ((last < jCopy.length)
-                //         && (Double.compare(jCopy[p].slopeTo(jCopy[first]),
-                //            jCopy[p].slopeTo(jCopy[last])) == 0))
-                // {
-                //     last++;
-                // }
                 // if found at least 3 elements, make segment if it's unique
                 if (last - first >= 3 && jCopy[p].compareTo(jCopy[first]) < 0)
                 {
