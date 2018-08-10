@@ -29,3 +29,6 @@ hs_err_pid*
 
 #Eclipse Workspace
 /Eclipse_Workspace/
+
+#folders
+/Assignment.4-8puzzle/8puzzle-testing/
