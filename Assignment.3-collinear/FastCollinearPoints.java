@@ -17,8 +17,7 @@ public class FastCollinearPoints {
     private final ArrayList<LineSegment> jSegments = new ArrayList<>();
 
     // Find all line segments containing 4 or more points
-    public FastCollinearPoints(Point[] points)
-    {
+    public FastCollinearPoints(Point[] points) {
         // Check corner cases
         checkNullEntries(points);
         checkDuplicatedEntries(points);
@@ -60,14 +59,12 @@ public class FastCollinearPoints {
     }
 
     // the number of line segments
-    public int numberOfSegments()
-    {
+    public int numberOfSegments() {
         return jSegments.size();
     }
 
     // the line segments
-    public LineSegment[] segments()
-    {
+    public LineSegment[] segments() {
         return jSegments.toArray(new LineSegment[jSegments.size()]);
     }
 
