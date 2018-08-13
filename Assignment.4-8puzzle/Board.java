@@ -9,11 +9,14 @@
  * 
  *  Description: A data-type to represent board having the 8-puzzle (n^2-1) puzzle.
  ******************************************************************************/
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Board {
     private final int[][] internalBlocks;
     private final int boardDim;
     private int hammingScore = 0;
+    private int manhattanScore = 0;
 
     // construct a board from an n-by-n array of blocks
     // (where blocks[i][j] = block in row i, column j)
@@ -44,7 +47,7 @@ public class Board {
         for (int i = 0; i < boardDim; i++) {
             for (int j = 0; j < boardDim; j++) {
                 value = internalBlocks[i][j];
-                newScore += (value == (i * boardDim) + j) ? 0 : 1;
+                newScore += (value == (i * boardDim) + j + 1) ? 0 : 1;
             }
         }
         if (value == 0) // subtract last value
@@ -54,7 +57,26 @@ public class Board {
 
     // sum of Manhattan distances between blocks and goal
     public int manhattan() {
-        return 0;
+        int newScore = 0;
+        int value = 0;
+        int addValue = 0;
+        for (int i = 0; i < boardDim; i++) {
+            for (int j = 0; j < boardDim; j++) {
+                value = internalBlocks[i][j];
+                if (value == (i * boardDim) + j + 1) {
+                    addValue = 0;
+                }
+                else {
+                    // Find destination coordinate
+                    int iVal = (value - 1) / boardDim;
+                    int jVal = (value - 1) % boardDim;
+                    addValue = abs(iVal - i) + abs(jVal - j);
+                }
+                newScore += addValue;
+            }
+        }
+        newScore -= addValue;
+        return (newScore + manhattanScore);
     }
 
     // is this board the goal board?
@@ -84,6 +106,32 @@ public class Board {
 
     // unit tests (not graded)
     public static void main(String[] args) {
+        // for each command-line argument
+        for (String filename : args) {
+
+            // read in the board specified in the filename
+            In in = new In(filename);
+            int n = in.readInt();
+            int[][] tiles = new int[n][n];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    tiles[i][j] = in.readInt();
+                }
+            }
+
+            // solve the slider puzzle
+            Board initial = new Board(tiles);
+            int hamming_score = initial.hamming();
+            int manhatan_score = initial.manhattan();
+            //Solver solver = new Solver(initial);
+            StdOut.println(filename + ": hamming = " + hamming_score + " : mahnatan = " + manhatan_score);
+            //StdOut.println(filename + ": " + solver.moves());
+        }
         return;
+    }
+
+    private int abs (int x) {
+        int y = (x >= 0) ? x : -x;
+        return y;
     }
 }

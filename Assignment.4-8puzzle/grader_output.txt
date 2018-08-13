@@ -1,0 +1,58 @@
+See the Assessment Guide for information on how to interpret this report.
+
+ASSESSMENT SUMMARY
+
+Compilation:  PASSED
+API:          FAILED (2 errors)
+
+Spotbugs:     No tests available for autograding.
+PMD:          PASSED
+Checkstyle:   No tests available for autograding.
+
+Correctness:  No tests available for autograding.
+Memory:       No tests available for autograding.
+Timing:       No tests available for autograding.
+
+Aggregate score: 5.00%
+[Compilation: 5%, API: 5%, Spotbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
+
+ASSESSMENT DETAILS
+
+The following files were submitted:
+----------------------------------
+4.3K Aug 13 04:56 Board.java
+ 955 Aug 13 04:56 Solver.java
+
+
+********************************************************************************
+*  COMPILING                                                                    
+********************************************************************************
+
+
+% javac Board.java
+*-----------------------------------------------------------
+
+% javac Solver.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+Checking the APIs of your programs.
+*-----------------------------------------------------------
+Board:
+The following methods are missing:
+  * public Board twin()
+  * public Iterable<Board> neighbors()
+
+
+Solver:
+The following methods are missing:
+  * public Iterable<Board> solution()
+
+
+================================================================
+
+
+ABORTING: either the compilation or API test failed.
