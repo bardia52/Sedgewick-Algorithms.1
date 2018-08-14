@@ -10,6 +10,7 @@
  *  Description: A data-type to represent board having the 8-puzzle (n^2-1) puzzle.
  ******************************************************************************/
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdOut;
 
 public class Board {
@@ -30,6 +31,17 @@ public class Board {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 this.internalBlocks[i][j] = blocks[i][j];
+            }
+        }
+        this.boardDim = n;
+    }
+
+    private Board(Board x) {
+        int n = x.dimension();
+        internalBlocks = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                this.internalBlocks[i][j] = x.internalBlocks[i][j];
             }
         }
         this.boardDim = n;
@@ -85,9 +97,10 @@ public class Board {
     }
 
     // a board that is obtained by exchanging any pair of blocks
-    /*public Board twin() {
-        return new Board(int [this.boardDim][this.boardDim]);
-    }*/
+    public Board twin() {
+        Board twinBoard = new Board(this);
+        return twinBoard;
+    }
 
     // does this board equal y?
     public boolean equals(Object y) {
@@ -95,10 +108,11 @@ public class Board {
     }
 
     // all neighboring boards
-/*    public Iterable<Board> neighbors() {
-        
+    public Iterable<Board> neighbors() {
+        Queue<Board> boards = new Queue<Board>();
+        return boards;
     }
-*/
+
     // string representation of this board (in the output format specified below)
     public String toString() {
         return "1";
@@ -121,16 +135,16 @@ public class Board {
 
             // solve the slider puzzle
             Board initial = new Board(tiles);
-            int hamming_score = initial.hamming();
-            int manhatan_score = initial.manhattan();
-            //Solver solver = new Solver(initial);
-            StdOut.println(filename + ": hamming = " + hamming_score + " : mahnatan = " + manhatan_score);
-            //StdOut.println(filename + ": " + solver.moves());
+            int hammingScore = initial.hamming();
+            int manhatanScore = initial.manhattan();
+            // Solver solver = new Solver(initial);
+            StdOut.println(filename + ": hamming = " + hammingScore + " : mahnatan = " + manhatanScore);
+            // StdOut.println(filename + ": " + solver.moves());
         }
         return;
     }
 
-    private int abs (int x) {
+    private int abs(int x) {
         int y = (x >= 0) ? x : -x;
         return y;
     }

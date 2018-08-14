@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.Queue;
+
 /******************************************************************************
  *  Name:    Bardia Alavi
  *  NetID:   bardia
@@ -26,8 +28,8 @@ public class Solver {
     }
 
     // sequence of boards in a shortest solution; null if unsolvable
-/*    public Iterable<Board> solution() {
-        Board x = new Board(int [3][3]);
-        return x;
+    public Iterable<Board> solution() {
+        Queue<Board> boards = new Queue<Board>();
+        return boards;
     }
-*/}
+}
