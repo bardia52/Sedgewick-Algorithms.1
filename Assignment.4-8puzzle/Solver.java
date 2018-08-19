@@ -1,5 +1,3 @@
-import edu.princeton.cs.algs4.Queue;
-
 /******************************************************************************
  *  Name:    Bardia Alavi
  *  NetID:   bardia
@@ -11,15 +9,28 @@ import edu.princeton.cs.algs4.Queue;
  * 
  *  Description: A data-type to represent board having the 8-puzzle (n^2-1) puzzle.
  ******************************************************************************/
+import edu.princeton.cs.algs4.MinPQ;
+import edu.princeton.cs.algs4.Queue;
+import java.util.Comparator;
 
 public class Solver {
+    private int distance;
+    private final MinPQ<SearchNode> minPQ = new MinPQ();
+
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
+        distance = initial.manhattan();
+        SearchNode firstNode = new SearchNode(distance, null, initial);
+        //minPQ = new MinPQ(firstNode);
+        minPQ.insert(firstNode);
     }
 
     // is the initial board solvable?
     public boolean isSolvable() {
-        return true;
+        if (distance == 0)
+            return true;
+        else
+            return false;
     }
 
     // min number of moves to solve initial board; -1 if unsolvable
@@ -32,4 +43,30 @@ public class Solver {
         Queue<Board> boards = new Queue<Board>();
         return boards;
     }
+}
+
+class SearchNode implements Comparator {
+    private final int priority;
+    private final SearchNode previous;
+    private final Board current;
+
+    public SearchNode(int priority, SearchNode previous, Board current) {
+        this.priority = priority;
+        this.previous = previous;
+        this.current = current;
+    }
+
+    public int compare(SearchNode v, SearchNode w) {
+        return (v.priority >= w.priority) ? 1 : 0;
+    }
+}
+
+class SortNode implements Comparator<SearchNode> {
+    
+}
+
+    /*@Override
+    public int compare(Object o1, Object o2) {
+        return (o1.priority >= o2.priority) ? 1 : 0;
+    }*/
 }
