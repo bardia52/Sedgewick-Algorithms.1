@@ -45,7 +45,7 @@ public class Solver {
     }
 }
 
-class SearchNode implements Comparator {
+class SearchNode {
     private final int priority;
     private final SearchNode previous;
     private final Board current;
@@ -55,18 +55,22 @@ class SearchNode implements Comparator {
         this.previous = previous;
         this.current = current;
     }
-
-    public int compare(SearchNode v, SearchNode w) {
-        return (v.priority >= w.priority) ? 1 : 0;
+    
+    public int getPriority() {
+    	return this.priority;
     }
+
 }
 
 class SortNode implements Comparator<SearchNode> {
     
+    public int compare(SearchNode v, SearchNode w) {
+        return (v.getPriority() >= w.getPriority()) ? 1 : 0;
+    }
 }
 
     /*@Override
     public int compare(Object o1, Object o2) {
         return (o1.priority >= o2.priority) ? 1 : 0;
     }*/
-}
+
