@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path=""/>
-	<classpathentry kind="lib" path="E:/Codes/Sedgewick-Algorithms.1/algs4.jar"/>
+	<classpathentry kind="lib" path="C:/java/algs4.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
