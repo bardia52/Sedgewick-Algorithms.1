@@ -6,22 +6,22 @@ Compilation:  FAILED (0 errors, 2 warnings)
 API:          PASSED
 
 Spotbugs:     FAILED (3 warnings)
-PMD:          FAILED (7 warnings)
+PMD:          FAILED (5 warnings)
 Checkstyle:   FAILED (0 errors, 6 warnings)
 
-Correctness:  19/49 tests passed
+Correctness:  24/49 tests passed
 Memory:       22/22 tests passed
 Timing:       25/125 tests passed
 
-Aggregate score: 42.27%
+Aggregate score: 48.39%
 [Compilation: 5%, API: 5%, Spotbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
 
 ASSESSMENT DETAILS
 
 The following files were submitted:
 ----------------------------------
-5.8K Aug 21 15:41 Board.java
-2.0K Aug 21 15:41 Solver.java
+8.5K Aug 21 20:41 Board.java
+2.0K Aug 21 20:41 Solver.java
 
 
 ********************************************************************************
@@ -67,7 +67,7 @@ Solver:
 
 % spotbugs *.class
 *-----------------------------------------------------------
-M P SBSC_USE_STRINGBUFFER_CONCATENATION SBSC: Builds a 'String' object using the '+' operator in a loop, which can take time quadratic in the length of the resulting string. Instead, use 'StringBuilder'.  At Board.java:[line 143]
+M P SBSC_USE_STRINGBUFFER_CONCATENATION SBSC: Builds a 'String' object using the '+' operator in a loop, which can take time quadratic in the length of the resulting string. Instead, use 'StringBuilder'.  At Board.java:[line 156]
 L P URF_UNREAD_FIELD UrF: The instance (or static) variable 'previous' is never read. Consider removing it from the class.  At Solver.java:[line 52]
 L P URF_UNREAD_FIELD UrF: The instance (or static) variable 'current' is never read. Consider removing it from the class.  At Solver.java:[line 53]
 Warnings generated: 3
@@ -78,14 +78,12 @@ Warnings generated: 3
 
 % pmd .
 *-----------------------------------------------------------
-Board.java:19: The private instance (or static) variable 'hammingScore' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
-Board.java:20: The private instance (or static) variable 'manhattanScore' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
-Board.java:143: No need to call String.valueOf to append to a string. [UselessStringValueOf]
+Board.java:156: No need to call String.valueOf to append to a string. [UselessStringValueOf]
 Solver.java:47: Avoid unused private instance (or static) variables, such as 'previous'. [UnusedPrivateField]
 Solver.java:47: Can you replace the instance (or static) variable 'previous' with a local variable? [SingularField]
 Solver.java:48: Avoid unused private instance (or static) variables, such as 'current'. [UnusedPrivateField]
 Solver.java:48: Can you replace the instance (or static) variable 'current' with a local variable? [SingularField]
-PMD ends with 7 warnings.
+PMD ends with 5 warnings.
 
 
 ================================================================
@@ -189,356 +187,40 @@ Test 4b: check toString() with random n-by-n boards
 
 Test 5a: check neighbors() with file inputs
   * puzzle04.txt
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 2
-    - board
-        3
-         0  1  3 
-         4  2  5 
-         7  8  6 
-
-
   * puzzle00.txt
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 2
-    - board
-        10
-         1  2  3  4  5  6  7  8  9 10 
-        11 12 13 14 15 16 17 18 19 20 
-        21 22 23 24 25 26 27 28 29 30 
-        31 32 33 34 35 36 37 38 39 40 
-        41 42 43 44 45 46 47 48 49 50 
-        51 52 53 54 55 56 57 58 59 60 
-        61 62 63 64 65 66 67 68 69 70 
-        71 72 73 74 75 76 77 78 79 80 
-        81 82 83 84 85 86 87 88 89 90 
-        91 92 93 94 95 96 97 98 99  0 
-
-
   * puzzle06.txt
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 2
-    - board
-        4
-         0  1  2  3 
-         5  6  7  4 
-         9 10 11  8 
-        13 14 15 12 
-
-
   * puzzle09.txt
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 3
-    - board
-        4
-         2  0  3  4 
-         1 10  6  8 
-         5  9  7 12 
-        13 14 11 15 
-
-
   * puzzle23.txt
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 3
-    - board
-        3
-         5  0  4 
-         2  3  8 
-         7  1  6 
-
-
   * puzzle2x2-unsolvable1.txt
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 2
-    - board
-        2
-         1  0 
-         2  3 
-
-
-==> FAILED
+==> passed
 
 Test 5b: check neighbors() with random n-by-n boards
   * 2-by-2
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 2
-    - board
-        2
-         1  3 
-         2  0 
-
-
-    - failed on trial 1 of 1000
-
   * 3-by-3
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 3
-    - board
-        3
-         7  1  8 
-         4  5  6 
-         2  0  3 
-
-
-    - failed on trial 1 of 1000
-
   * 4-by-4
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 2
-    - board
-        4
-         0  5  2  7 
-        14 15  9  8 
-         3 13 11 10 
-         1  6 12  4 
-
-
-    - failed on trial 1 of 1000
-
   * 5-by-5
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 4
-    - board
-        5
-        14  2 12 20 13 
-         1  4 18  0  9 
-        23  5 19  6 17 
-         7 24  8 15 16 
-        21 10 22 11  3 
-
-
-    - failed on trial 1 of 1000
-
   * 9-by-9
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 4
-    - board
-        9
-        12 18  3 45 24 55 77 26 36 
-        30  0 48 59 53  4 20 80 32 
-        15 78 63 37 69 43 27 42 57 
-        11 61  7 17 19 29 72 31 10 
-        56 13  2 14 49 75 70 67 51 
-        44 66 38  9 35 74 46 33 25 
-        76 41 47  1 62 65 21 28 52 
-         8 40 68 79 22 64 60 73  5 
-         6 54 16 71 34 50 58 39 23 
-
-
-    - failed on trial 1 of 1000
-
   * 10-by-10
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 3
-    - board
-        10
-        29 39  5  0 16 15 82 62  8 69 
-        83 30 98 45 61 18 42 64 63 68 
-        51 34  4 59 10 32 36 84 27 65 
-        86  7 74 23 93 60 90 49 26 57 
-        75 72 85 44 28 91 99 88 78 35 
-        77 96 92 95 33 22  2 25 80 87 
-         3 20 58  6 48 50 37 43 94 17 
-        13 54 38 97 76 21 73  1 79 46 
-        52 70 14 53 71 19 89 12 41 66 
-        56 67 40 55 81 31 47 24  9 11 
-
-
-    - failed on trial 1 of 1000
-
   * 127-by-127
-    - incorrect number of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 4
-
-    - failed on trial 1 of 10
-
-==> FAILED
+==> passed
 
 Test 6a: check neighbors() of neigbors() with file inputs
   * puzzle04.txt
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 6
-    - board
-        3
-         0  1  3 
-         4  2  5 
-         7  8  6 
-
-
   * puzzle00.txt
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 6
-    - board
-        10
-         1  2  3  4  5  6  7  8  9 10 
-        11 12 13 14 15 16 17 18 19 20 
-        21 22 23 24 25 26 27 28 29 30 
-        31 32 33 34 35 36 37 38 39 40 
-        41 42 43 44 45 46 47 48 49 50 
-        51 52 53 54 55 56 57 58 59 60 
-        61 62 63 64 65 66 67 68 69 70 
-        71 72 73 74 75 76 77 78 79 80 
-        81 82 83 84 85 86 87 88 89 90 
-        91 92 93 94 95 96 97 98 99  0 
-
-
   * puzzle06.txt
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 6
-    - board
-        4
-         0  1  2  3 
-         5  6  7  4 
-         9 10 11  8 
-        13 14 15 12 
-
-
   * puzzle09.txt
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 9
-    - board
-        4
-         2  0  3  4 
-         1 10  6  8 
-         5  9  7 12 
-        13 14 11 15 
-
-
   * puzzle23.txt
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 8
-    - board
-        3
-         5  0  4 
-         2  3  8 
-         7  1  6 
-
-
   * puzzle2x2-unsolvable1.txt
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 4
-    - board
-        2
-         1  0 
-         2  3 
-
-
-==> FAILED
+==> passed
 
 Test 6b: check neighbors() of neighbors() with random n-by-n boards
   * 2-by-2
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 4
-    - board
-        2
-         2  1 
-         0  3 
-
-
-    - failed on trial 1 of 1000
-
   * 3-by-3
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 6
-    - board
-        3
-         0  1  2 
-         3  6  4 
-         8  5  7 
-
-
-    - failed on trial 1 of 1000
-
   * 4-by-4
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 14
-    - board
-        4
-         1  4  6 12 
-        13  0  8 10 
-        11  2 14  9 
-        15  5  7  3 
-
-
-    - failed on trial 1 of 1000
-
   * 5-by-5
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 9
-    - board
-        5
-        12  0  1 23 11 
-         6 19 14 17 13 
-        18 22 20 16  2 
-        15  3  8  7 10 
-        24 21  5  4  9 
-
-
-    - failed on trial 1 of 1000
-
   * 9-by-9
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 16
-    - board
-        9
-        53 45 20 55 13 80 79 26 50 
-         8  1  7 23 59 76 70 71 62 
-        36 33 12  2 73 54 56 75 14 
-        61 60 68 25 78 32 77 42 64 
-        28 15  3 29  6 18 22 48  4 
-        11 58 51  9 38 27 34 16 37 
-        47 10  0 41 67 30 66  5 69 
-        72 17 43 21 52 44 46 65 39 
-        19 24 31 63 57 49 35 40 74 
-
-
-    - failed on trial 1 of 1000
-
   * 10-by-10
-    - incorrect number of neighbors of neighbors
-    - student   neighbors = 0
-    - reference neighbors = 16
-    - board
-        10
-         3 59 41 75 66  4 18 53  2 67 
-        42 81 50 99 57 26 92 54 37 25 
-        23 14 32 71 47  5 82  7 90 94 
-        65 55 58 22 88 79 11 76 78 49 
-        29 20 91 69 34 51 64 56 44 80 
-        63  9  0 86 68 72 48 43 77 38 
-        16 96 62 73 31 28 70 84 27 45 
-        87 85 61 83 24 93 33 40 60 98 
-        89 12 74 17 13 30 39 10  1 21 
-        97 46 36 52  8  6 19 35 95 15 
-
-
-    - failed on trial 1 of 1000
-
-==> FAILED
+==> passed
 
 Test 7a: check twin() with file inputs
   * puzzle04.txt
@@ -609,8 +291,8 @@ Test 7b: check twin() with random n-by-n boards
   * 2-by-2
     - twin() doesn't return a twin
         2
-         3 2 
-         0 1 
+         0 2 
+         3 1 
          
 
 
@@ -619,9 +301,9 @@ Test 7b: check twin() with random n-by-n boards
   * 3-by-3
     - twin() doesn't return a twin
         3
-         3 7 2 
-         5 8 0 
-         1 4 6 
+         7 8 0 
+         2 5 6 
+         1 3 4 
          
 
 
@@ -630,10 +312,10 @@ Test 7b: check twin() with random n-by-n boards
   * 4-by-4
     - twin() doesn't return a twin
         4
-         15 14 8 1 
-         9 13 3 2 
-         0 4 7 11 
-         12 10 5 6 
+         10 15 8 14 
+         9 0 11 7 
+         13 2 6 1 
+         12 4 5 3 
          
 
 
@@ -642,11 +324,11 @@ Test 7b: check twin() with random n-by-n boards
   * 5-by-5
     - twin() doesn't return a twin
         5
-         17 2 5 10 6 
-         15 7 0 8 23 
-         13 19 24 20 18 
-         4 1 21 11 22 
-         9 3 12 14 16 
+         0 23 7 1 22 
+         18 11 6 20 3 
+         10 5 19 2 21 
+         4 13 15 8 16 
+         17 12 9 24 14 
          
 
 
@@ -655,15 +337,15 @@ Test 7b: check twin() with random n-by-n boards
   * 9-by-9
     - twin() doesn't return a twin
         9
-         54 3 68 12 32 30 56 14 9 
-         80 2 23 37 38 16 19 4 42 
-         18 5 1 13 45 51 25 74 15 
-         36 66 29 43 39 17 61 26 72 
-         52 48 31 40 6 24 75 53 73 
-         69 58 28 71 34 50 60 8 67 
-         79 44 65 21 33 55 62 35 64 
-         70 78 41 57 7 27 76 20 63 
-         0 47 10 22 11 49 59 46 77 
+         63 40 79 26 12 66 64 29 9 
+         67 78 68 28 41 2 54 44 57 
+         0 55 8 35 37 65 10 4 32 
+         34 42 39 33 56 77 43 53 36 
+         49 46 75 3 5 14 62 6 45 
+         61 7 21 71 25 30 70 16 19 
+         23 74 60 48 31 11 17 76 38 
+         15 51 80 27 59 13 50 24 58 
+         52 47 69 20 72 73 18 22 1 
          
 
 
@@ -672,16 +354,16 @@ Test 7b: check twin() with random n-by-n boards
   * 10-by-10
     - twin() doesn't return a twin
         10
-         6 87 34 73 96 10 46 80 25 45 
-         83 20 5 39 59 15 35 57 94 95 
-         13 0 72 24 19 71 58 79 26 77 
-         28 31 3 44 81 74 66 53 84 30 
-         23 92 85 2 78 76 64 93 52 62 
-         12 69 37 70 8 67 27 98 43 54 
-         61 60 14 86 29 48 11 16 38 65 
-         68 51 82 1 36 49 17 9 90 42 
-         91 32 18 75 89 21 41 4 99 33 
-         55 56 63 7 22 50 47 88 97 40 
+         28 38 25 30 23 1 7 58 95 80 
+         51 8 6 2 63 70 53 31 54 92 
+         57 84 96 18 52 13 65 27 72 61 
+         90 82 48 97 94 67 68 33 91 56 
+         46 86 11 15 24 79 69 12 73 74 
+         64 50 21 83 10 0 55 89 16 20 
+         3 47 66 4 81 88 78 99 40 5 
+         43 62 45 60 34 14 22 35 87 41 
+         19 36 29 44 71 76 75 26 77 49 
+         32 39 93 42 17 9 85 37 98 59 
          
 
 
@@ -760,152 +442,86 @@ Test 12: check that Board is immutable by testing whether methods
 Test 13: check dimension() on a board that is kth-neighbor of a board
   * 0th neighbor of puzzle27.txt
   * 1st neighbor of puzzle27.txt
-    java.lang.IllegalArgumentException: argument must be positive
-
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkDimensionWithNeighbors(TestBoard.java:279)
-    TestBoard.checkDimensionWithNeighbors(TestBoard.java:268)
-    TestBoard.test13(TestBoard.java:1513)
-    TestBoard.main(TestBoard.java:1576)
-
   * 2nd neighbor of puzzle27.txt
-    java.lang.IllegalArgumentException: argument must be positive
-
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkDimensionWithNeighbors(TestBoard.java:279)
-    TestBoard.checkDimensionWithNeighbors(TestBoard.java:268)
-    TestBoard.test13(TestBoard.java:1514)
-    TestBoard.main(TestBoard.java:1576)
-
   * 13th neighbor of puzzle27.txt
-    java.lang.IllegalArgumentException: argument must be positive
-
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkDimensionWithNeighbors(TestBoard.java:279)
-    TestBoard.checkDimensionWithNeighbors(TestBoard.java:268)
-    TestBoard.test13(TestBoard.java:1515)
-    TestBoard.main(TestBoard.java:1576)
-
   * 13th neighbor of puzzle00.txt
-    java.lang.IllegalArgumentException: argument must be positive
-
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkDimensionWithNeighbors(TestBoard.java:279)
-    TestBoard.checkDimensionWithNeighbors(TestBoard.java:268)
-    TestBoard.test13(TestBoard.java:1516)
-    TestBoard.main(TestBoard.java:1576)
-
   * 13th neighbor of puzzle2x2-unsolvable1.txt
-    java.lang.IllegalArgumentException: argument must be positive
-
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkDimensionWithNeighbors(TestBoard.java:279)
-    TestBoard.checkDimensionWithNeighbors(TestBoard.java:268)
-    TestBoard.test13(TestBoard.java:1517)
-    TestBoard.main(TestBoard.java:1576)
-
-==> FAILED
+==> passed
 
 Test 14: check hamming() on a board that is kth-neighbor of a board
   * 0th neighbor of puzzle27.txt
   * 1st neighbor of puzzle27.txt
-    java.lang.IllegalArgumentException: argument must be positive
+    - student   hamming() = 14
+    - reference hamming() = 7
+        3
+         5  8  7 
+         1  0  6 
+         3  4  2 
 
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkHammingWithNeighbors(TestBoard.java:193)
-    TestBoard.checkHammingWithNeighbors(TestBoard.java:182)
-    TestBoard.test14(TestBoard.java:1525)
-    TestBoard.main(TestBoard.java:1577)
 
   * 2nd neighbor of puzzle27.txt
-    java.lang.IllegalArgumentException: argument must be positive
+    - student   hamming() = 14
+    - reference hamming() = 7
+        3
+         5  8  7 
+         0  4  6 
+         1  3  2 
 
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkHammingWithNeighbors(TestBoard.java:193)
-    TestBoard.checkHammingWithNeighbors(TestBoard.java:182)
-    TestBoard.test14(TestBoard.java:1526)
-    TestBoard.main(TestBoard.java:1577)
 
   * 13th neighbor of puzzle27.txt
-    java.lang.IllegalArgumentException: argument must be positive
+    - student   hamming() = 16
+    - reference hamming() = 8
+        3
+         5  8  0 
+         1  4  7 
+         3  2  6 
 
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkHammingWithNeighbors(TestBoard.java:193)
-    TestBoard.checkHammingWithNeighbors(TestBoard.java:182)
-    TestBoard.test14(TestBoard.java:1527)
-    TestBoard.main(TestBoard.java:1577)
 
   * 13th neighbor of puzzle00.txt
-    java.lang.IllegalArgumentException: argument must be positive
-
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkHammingWithNeighbors(TestBoard.java:193)
-    TestBoard.checkHammingWithNeighbors(TestBoard.java:182)
-    TestBoard.test14(TestBoard.java:1528)
-    TestBoard.main(TestBoard.java:1577)
-
   * 13th neighbor of puzzle2x2-unsolvable1.txt
-    java.lang.IllegalArgumentException: argument must be positive
-
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkHammingWithNeighbors(TestBoard.java:193)
-    TestBoard.checkHammingWithNeighbors(TestBoard.java:182)
-    TestBoard.test14(TestBoard.java:1529)
-    TestBoard.main(TestBoard.java:1577)
-
 ==> FAILED
 
 Test 15: check manhattan() on a board that is a kth-neighbor of a board
   * 0th neighbor of puzzle27.txt
   * 1st neighbor of puzzle27.txt
-    java.lang.IllegalArgumentException: argument must be positive
+    - student   manhattan() = 32
+    - reference manhattan() = 16
+        3
+         5  8  7 
+         1  4  6 
+         0  3  2 
 
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkManhattanWithNeighbors(TestBoard.java:364)
-    TestBoard.checkManhattanWithNeighbors(TestBoard.java:351)
-    TestBoard.test15(TestBoard.java:1537)
-    TestBoard.main(TestBoard.java:1578)
 
   * 2nd neighbor of puzzle27.txt
-    java.lang.IllegalArgumentException: argument must be positive
-
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkManhattanWithNeighbors(TestBoard.java:364)
-    TestBoard.checkManhattanWithNeighbors(TestBoard.java:351)
-    TestBoard.test15(TestBoard.java:1538)
-    TestBoard.main(TestBoard.java:1578)
-
   * 13th neighbor of puzzle27.txt
-    java.lang.IllegalArgumentException: argument must be positive
-
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkManhattanWithNeighbors(TestBoard.java:364)
-    TestBoard.checkManhattanWithNeighbors(TestBoard.java:351)
-    TestBoard.test15(TestBoard.java:1539)
-    TestBoard.main(TestBoard.java:1578)
-
   * 13th neighbor of puzzle00.txt
-    java.lang.IllegalArgumentException: argument must be positive
+    - student   manhattan() = 22
+    - reference manhattan() = 11
+        10
+         1  2  3  4  5  6  7  8  9 10 
+        11 12 13 14 15 16 17 18  0 19 
+        21 22 23 24 25 26 27 28 30 20 
+        31 32 33 34 35 36 37 38 29 40 
+        41 42 43 44 45 46 47 48 39 50 
+        51 52 53 54 55 56 57 58 49 60 
+        61 62 63 64 65 66 67 68 59 69 
+        71 72 73 74 75 76 77 78 79 70 
+        81 82 83 84 85 86 87 88 89 80 
+        91 92 93 94 95 96 97 98 99 90 
 
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkManhattanWithNeighbors(TestBoard.java:364)
-    TestBoard.checkManhattanWithNeighbors(TestBoard.java:351)
-    TestBoard.test15(TestBoard.java:1540)
-    TestBoard.main(TestBoard.java:1578)
 
   * 13th neighbor of puzzle2x2-unsolvable1.txt
-    java.lang.IllegalArgumentException: argument must be positive
+    - student   manhattan() = 8
+    - reference manhattan() = 4
+        2
+         0  3 
+         1  2 
 
-    edu.princeton.cs.algs4.StdRandom.uniform(StdRandom.java:203)
-    TestBoard.checkManhattanWithNeighbors(TestBoard.java:364)
-    TestBoard.checkManhattanWithNeighbors(TestBoard.java:351)
-    TestBoard.test15(TestBoard.java:1541)
-    TestBoard.main(TestBoard.java:1578)
 
 ==> FAILED
 
 
-Total: 15/24 tests passed!
+Total: 20/24 tests passed!
 
 
 ================================================================
@@ -1506,8 +1122,8 @@ Test 3a: check moves() with random solvable n-by-n boards
     - board =
         3
          1  2  3 
-         4  5  0 
-         7  8  6 
+         4  5  6 
+         7  0  8 
 
     - failed on trial 1 of 1000
 
@@ -1588,10 +1204,10 @@ Test 5b: call isSolvable() on random n-by-n boards
     - reference isSolvable() = true
     - board =
         2
-         1  2 
-         0  3 
+         2  3 
+         1  0 
 
-    - failed on trial 1 of 100
+    - failed on trial 2 of 100
 
 ==> FAILED
 
@@ -2189,7 +1805,403 @@ Test 12a: check moves() with 3-by-3 file inputs
   * puzzle3x3-26.txt
     - moves() returns wrong value
     - student   moves() = 0
-    - reference m
+    - reference moves() = 26
+    - board =
+        3
+         4  8  7 
+         5  3  1 
+         0  6  2 
+
+  * puzzle3x3-27.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 27
+    - board =
+        3
+         1  6  4 
+         0  3  5 
+         8  2  7 
+
+  * puzzle3x3-28.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 28
+    - board =
+        3
+         6  3  8 
+         5  4  1 
+         7  2  0 
+
+  * puzzle3x3-29.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 29
+    - board =
+        3
+         1  8  5 
+         0  2  4 
+         3  6  7 
+
+  * puzzle3x3-30.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 30
+    - board =
+        3
+         8  6  7 
+         2  0  4 
+         3  5  1 
+
+==> FAILED
+
+Test 12b: check solution() with 3-by-3 file inputs
+  * puzzle3x3-00.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-01.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-02.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-03.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-04.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-05.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-06.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-07.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-08.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-09.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-10.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-11.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-12.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-13.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-14.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-15.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-16.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-17.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-18.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-19.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-20.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-21.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-22.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-23.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-24.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-25.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-26.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-27.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-28.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-29.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle3x3-30.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+==> FAILED
+
+Test 13a: check moves() with 4-by-4 file inputs
+  * puzzle4x4-00.txt
+  * puzzle4x4-01.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 1
+    - board =
+        4
+         1  2  3  4 
+         5  6  7  8 
+         9 10 11  0 
+        13 14 15 12 
+
+  * puzzle4x4-02.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 2
+    - board =
+        4
+         1  2  3  4 
+         5  6  7  0 
+         9 10 11  8 
+        13 14 15 12 
+
+  * puzzle4x4-03.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 3
+    - board =
+        4
+         1  2  3  4 
+         5  6  0  8 
+         9 10  7 12 
+        13 14 11 15 
+
+  * puzzle4x4-04.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 4
+    - board =
+        4
+         1  2  3  4 
+         5  0  7  8 
+         9  6 11 12 
+        13 10 14 15 
+
+  * puzzle4x4-05.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 5
+    - board =
+        4
+         1  2  3  4 
+         5  6  7  8 
+        10  0 11 12 
+         9 13 14 15 
+
+  * puzzle4x4-06.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 6
+    - board =
+        4
+         1  6  2  4 
+         5  0  3  8 
+         9 10  7 11 
+        13 14 15 12 
+
+  * puzzle4x4-07.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 7
+    - board =
+        4
+         1  2  3  4 
+         6 10  7  8 
+         5  0 11 12 
+         9 13 14 15 
+
+  * puzzle4x4-08.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 8
+    - board =
+        4
+         1  2  3  4 
+         5 10  6  8 
+        13  9  7 12 
+        14  0 11 15 
+
+  * puzzle4x4-09.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 9
+    - board =
+        4
+         2  3  4  0 
+         1  6  7  8 
+         5 10 11 12 
+         9 13 14 15 
+
+  * puzzle4x4-10.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 10
+    - board =
+        4
+         1  2  4 12 
+         5  6  3  0 
+         9 10  8  7 
+        13 14 11 15 
+
+  * puzzle4x4-11.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 11
+    - board =
+        4
+         5  1  3  4 
+         9  2  7  8 
+        13  0 10 12 
+        14  6 11 15 
+
+  * puzzle4x4-12.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 12
+    - board =
+        4
+         5  1  2  4 
+         9  6  3  7 
+        13 10  0  8 
+        14 15 11 12 
+
+  * puzzle4x4-13.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 13
+    - board =
+        4
+         5  3  4  8 
+         2  1  0  7 
+         9  6 10 11 
+        13 14 15 12 
+
+  * puzzle4x4-14.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 14
+    - board =
+        4
+         1  2  8  3 
+         5 11  6  4 
+         0 10  7 12 
+         9 13 14 15 
+
+  * puzzle4x4-15.txt
+    - moves() returns wrong value
+    - stu
 
 ...
 

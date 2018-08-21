@@ -119,18 +119,31 @@ public class Board {
         Board that = (Board) y;
         if (this.boardDim != that.dimension())
             return false;
-        for (int i = 0; i < this.boardDim; i++)
+        for (int i = 0; i < this.boardDim; i++) {
             for (int j = 0; j < this.boardDim; j++) {
                 if (this.internalBlocks[i][j] != that.internalBlocks[i][j]) {
                     return false;
                 }
             }
+        }
         return true;
     }
 
     // all neighboring boards
     public Iterable<Board> neighbors() {
         Queue<Board> boards = new Queue<Board>();
+        Board newBoard = moveLeft();
+        if (!equals(newBoard))
+            boards.enqueue(newBoard);
+        newBoard = moveRight();
+        if (!equals(newBoard))
+            boards.enqueue(newBoard);
+        newBoard = moveUp();
+        if (!equals(newBoard))
+            boards.enqueue(newBoard);
+        newBoard = moveDown();
+        if (!equals(newBoard))
+            boards.enqueue(newBoard);
         return boards;
     }
 
@@ -173,6 +186,76 @@ public class Board {
             // StdOut.println(filename + ": " + solver.moves());
         }
         return;
+    }
+
+    private int findiZero() {
+        for (int i = 0; i < this.boardDim; i++) {
+            for (int j = 0; j < this.boardDim; j++) {
+                if (this.internalBlocks[i][j] == 0) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private int findjZero() {
+        for (int i = 0; i < this.boardDim; i++) {
+            for (int j = 0; j < this.boardDim; j++) {
+                if (this.internalBlocks[i][j] == 0) {
+                    return j;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private Board moveLeft() {
+        Board movedBoard = new Board(this);
+        int iZero = findiZero();
+        int jZero = findjZero();
+        if (jZero > 0) {
+            movedBoard.internalBlocks[iZero][jZero] = this.internalBlocks[iZero][jZero-1];
+            movedBoard.internalBlocks[iZero][jZero-1] = 0;
+            movedBoard.hammingScore = movedBoard.hamming();
+            movedBoard.manhattanScore = movedBoard.manhattan();
+        }
+        return movedBoard;
+    }
+
+    private Board moveRight() {
+        Board movedBoard = new Board(this);
+        int iZero = findiZero();
+        int jZero = findjZero();
+        if (jZero < this.boardDim-1) {
+            movedBoard.internalBlocks[iZero][jZero] = this.internalBlocks[iZero][jZero+1];
+            movedBoard.internalBlocks[iZero][jZero+1] = 0;
+        }
+        return movedBoard;
+    }
+
+    private Board moveUp() {
+        Board movedBoard = new Board(this);
+        int iZero = findiZero();
+        int jZero = findjZero();
+        if (iZero > 0) {
+            movedBoard.internalBlocks[iZero][jZero] = this.internalBlocks[iZero-1][jZero];
+            movedBoard.internalBlocks[iZero-1][jZero] = 0;
+            movedBoard.hammingScore = movedBoard.hamming();
+            movedBoard.manhattanScore = movedBoard.manhattan();
+        }
+        return movedBoard;
+    }
+
+    private Board moveDown() {
+        Board movedBoard = new Board(this);
+        int iZero = findiZero();
+        int jZero = findjZero();
+        if (iZero < this.boardDim-1) {
+            movedBoard.internalBlocks[iZero][jZero] = this.internalBlocks[iZero+1][jZero];
+            movedBoard.internalBlocks[iZero+1][jZero] = 0;
+        }
+        return movedBoard;
     }
 
     private int abs(int x) {
