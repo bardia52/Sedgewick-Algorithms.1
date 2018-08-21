@@ -56,13 +56,15 @@ public class Board {
     public int hamming() {
         int newScore = 0;
         int value = 0;
+        int goalValue = 0;
         for (int i = 0; i < boardDim; i++) {
             for (int j = 0; j < boardDim; j++) {
                 value = internalBlocks[i][j];
-                newScore += (value == (i * boardDim) + j + 1) ? 0 : 1;
+                goalValue = (i * boardDim) + j + 1;
+                newScore += (value == goalValue) ? 0 : 1;
             }
         }
-        if (value == 0) // subtract last value
+        if (value != goalValue) // subtract last value
             newScore--;
         return (newScore + hammingScore);
     }
@@ -75,7 +77,8 @@ public class Board {
         for (int i = 0; i < boardDim; i++) {
             for (int j = 0; j < boardDim; j++) {
                 value = internalBlocks[i][j];
-                if (value == (i * boardDim) + j + 1) {
+                int goalValue = (i * boardDim) + j + 1;
+                if ((value == goalValue) || (value == 0)) {
                     addValue = 0;
                 }
                 else {
@@ -87,13 +90,15 @@ public class Board {
                 newScore += addValue;
             }
         }
-        newScore -= addValue;
         return (newScore + manhattanScore);
     }
 
     // is this board the goal board?
     public boolean isGoal() {
-        return true;
+        if (this.hamming() == 0)
+            return true;
+        else
+            return false;
     }
 
     // a board that is obtained by exchanging any pair of blocks
@@ -104,7 +109,15 @@ public class Board {
 
     // does this board equal y?
     public boolean equals(Object y) {
-        return true;
+/*        if (this.boardDim != y..dimension())
+            return false;
+        for (int i = 0; i < this.boardDim; i++)
+            for (int j = 0; j < this.boardDim; j++) {
+                if (this.internalBlocks[i][j] != y.internalBlocks[i][j]) {
+                    return false;
+                }
+            }
+*/        return true;
     }
 
     // all neighboring boards

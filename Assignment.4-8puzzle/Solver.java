@@ -14,23 +14,20 @@ import edu.princeton.cs.algs4.Queue;
 import java.util.Comparator;
 
 public class Solver {
-    private int distance;
+    private final int distance;
     private final MinPQ<SearchNode> minPQ = new MinPQ();
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         distance = initial.manhattan();
         SearchNode firstNode = new SearchNode(distance, null, initial);
-        //minPQ = new MinPQ(firstNode);
+        // minPQ = new MinPQ(firstNode);
         minPQ.insert(firstNode);
     }
 
     // is the initial board solvable?
     public boolean isSolvable() {
-        if (distance == 0)
-            return true;
-        else
-            return false;
+        return (distance == 0);
     }
 
     // min number of moves to solve initial board; -1 if unsolvable
@@ -57,9 +54,8 @@ class SearchNode {
     }
     
     public int getPriority() {
-    	return this.priority;
+        return this.priority;
     }
-
 }
 
 class SortNode implements Comparator<SearchNode> {
@@ -68,9 +64,3 @@ class SortNode implements Comparator<SearchNode> {
         return (v.getPriority() >= w.getPriority()) ? 1 : 0;
     }
 }
-
-    /*@Override
-    public int compare(Object o1, Object o2) {
-        return (o1.priority >= o2.priority) ? 1 : 0;
-    }*/
-
