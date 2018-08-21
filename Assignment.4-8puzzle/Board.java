@@ -108,16 +108,27 @@ public class Board {
     }
 
     // does this board equal y?
+    @Override
     public boolean equals(Object y) {
-/*        if (this.boardDim != y..dimension())
+        // self check
+        if (this == y)
+            return true;
+        // null check
+        if (y == null)
+            return false;
+        // type check and cast
+        if (getClass() != y.getClass())
+            return false;
+        Board that = (Board) y;
+        if (this.boardDim != that.dimension())
             return false;
         for (int i = 0; i < this.boardDim; i++)
             for (int j = 0; j < this.boardDim; j++) {
-                if (this.internalBlocks[i][j] != y.internalBlocks[i][j]) {
+                if (this.internalBlocks[i][j] != that.internalBlocks[i][j]) {
                     return false;
                 }
             }
-*/        return true;
+        return true;
     }
 
     // all neighboring boards

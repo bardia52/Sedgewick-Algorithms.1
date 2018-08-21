@@ -5,23 +5,23 @@ ASSESSMENT SUMMARY
 Compilation:  FAILED (0 errors, 2 warnings)
 API:          PASSED
 
-Spotbugs:     FAILED (3 warnings)
+Spotbugs:     FAILED (2 warnings)
 PMD:          FAILED (6 warnings)
 Checkstyle:   FAILED (0 errors, 7 warnings)
 
-Correctness:  14/49 tests passed
+Correctness:  17/49 tests passed
 Memory:       22/22 tests passed
 Timing:       25/125 tests passed
 
-Aggregate score: 36.14%
+Aggregate score: 39.82%
 [Compilation: 5%, API: 5%, Spotbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
 
 ASSESSMENT DETAILS
 
 The following files were submitted:
 ----------------------------------
-5.2K Aug 21 04:49 Board.java
-2.0K Aug 21 04:49 Solver.java
+5.5K Aug 21 05:04 Board.java
+2.0K Aug 21 05:04 Solver.java
 
 
 ********************************************************************************
@@ -67,10 +67,9 @@ Solver:
 
 % spotbugs *.class
 *-----------------------------------------------------------
-H C EQ_ALWAYS_TRUE Eq: The 'equals()' method always returns true.  At Board.java:[line 120]
 L P URF_UNREAD_FIELD UrF: The instance (or static) variable 'previous' is never read. Consider removing it from the class.  At Solver.java:[line 52]
 L P URF_UNREAD_FIELD UrF: The instance (or static) variable 'current' is never read. Consider removing it from the class.  At Solver.java:[line 53]
-Warnings generated: 3
+Warnings generated: 2
 
 
 ================================================================
@@ -259,8 +258,8 @@ Test 4b: check toString() with random n-by-n boards
 
     - reference toString()
         2
-         2  0 
          3  1 
+         2  0 
 
 
     - failed on trial 1 of 1000
@@ -272,9 +271,9 @@ Test 4b: check toString() with random n-by-n boards
 
     - reference toString()
         3
-         4  3  8 
-         1  2  6 
-         5  7  0 
+         6  5  4 
+         2  3  0 
+         7  8  1 
 
 
     - failed on trial 1 of 1000
@@ -286,10 +285,10 @@ Test 4b: check toString() with random n-by-n boards
 
     - reference toString()
         4
-         8  5  1 13 
-        14  6 12  7 
-        10 15  3  0 
-         4  2  9 11 
+         4  7 12  8 
+        13 10  1 15 
+         9 14 11  6 
+         3  0  5  2 
 
 
     - failed on trial 1 of 1000
@@ -301,11 +300,11 @@ Test 4b: check toString() with random n-by-n boards
 
     - reference toString()
         5
-         7  8 20 13 11 
-        21 12 10 18 24 
-        15 17 16  2 23 
-        22 14  6  9  0 
-        19  5  4  3  1 
+        21 15  9 24  4 
+        22 20 16  1 14 
+         8 19 17  3 13 
+         0  7 23 11 18 
+         5  6 12 10  2 
 
 
     - failed on trial 1 of 1000
@@ -317,15 +316,15 @@ Test 4b: check toString() with random n-by-n boards
 
     - reference toString()
         9
-        55 61 21 29 22 23 12 54 34 
-        64 50 74 71 17 75 52 70 79 
-         0  8 35 15 38 19 45 31 16 
-        25 42 10 39 30 13 65 32  5 
-        56 47  6 40 51 77  4 57 14 
-        44 26 53 11 41 76 33 67 58 
-        18 62 27 78 36 28  3 66  2 
-        63 72 46  7 20 68 69  9 24 
-        80 49 60 73 43 37  1 59 48 
+        16 12 55 24 54 58 37  1 50 
+        64 21 66 11 77 25 70 40 14 
+        28 48 59 13  0 19 78 35 44 
+        72 27 46 38 33 23 65  8 15 
+         7 26 30 49 67  2 79 75 20 
+        22 57 61 53 39 36  3 62 68 
+        32 41 45 51 10 52 47 74  9 
+        69 73 56 29 42 80 18 63 34 
+        17  5 71 43 76 60 31  4  6 
 
 
     - failed on trial 1 of 100
@@ -337,16 +336,16 @@ Test 4b: check toString() with random n-by-n boards
 
     - reference toString()
         10
-        62 90 77 54  0 59 10 68 79 87 
-         3 28 98 19 51 41 99 24 14 86 
-        49 32 71 82 69 36 89 65 44 88 
-        27 33 95 17 23 81 47 85 34 96 
-        30  4  5 56 37 66  8  2 50 38 
-        43 72 91 78 70 74 12 94 21 75 
-        52 46 42 93 53 39 57  9 31 45 
-        97 25 26 55  1 83 80 29 92  7 
-        61 13 15 76 16 73 67 48 58 11 
-        35 60 18 64  6 84 22 20 40 63 
+        79 46 75 35 37 39 21 74 94 89 
+        29 52 55 38 28 76 80 81 49 70 
+        56  7 57 91 22 93 64  0 69 14 
+        34 83 41 27 88 31 68 44 60 54 
+        97 10 51 84  9 19 48  4 99 71 
+        15 24 20 11 72 30 25 36 65 43 
+        50 12 45 86  2 87 23 63 58 67 
+         1 85 62 92 47 18 61 17 96 78 
+         8 95 32 66 77  3 82 40 98 13 
+        26 16 42  6 90 59 33 73  5 53 
 
 
     - failed on trial 1 of 100
@@ -442,8 +441,8 @@ Test 5b: check neighbors() with random n-by-n boards
     - reference neighbors = 2
     - board
         2
-         1  3 
-         2  0 
+         1  0 
+         3  2 
 
 
     - failed on trial 1 of 1000
@@ -451,12 +450,12 @@ Test 5b: check neighbors() with random n-by-n boards
   * 3-by-3
     - incorrect number of neighbors
     - student   neighbors = 0
-    - reference neighbors = 3
+    - reference neighbors = 2
     - board
         3
-         2  7  6 
-         0  5  1 
-         3  4  8 
+         3  6  8 
+         4  1  7 
+         0  2  5 
 
 
     - failed on trial 1 of 1000
@@ -467,10 +466,10 @@ Test 5b: check neighbors() with random n-by-n boards
     - reference neighbors = 2
     - board
         4
-        10 15  7  0 
-        13  1  5  3 
-         8  4  6 14 
-        11  2  9 12 
+         0 14 15 11 
+         3 10  6  5 
+         9 12  8  7 
+         1 13  4  2 
 
 
     - failed on trial 1 of 1000
@@ -478,14 +477,14 @@ Test 5b: check neighbors() with random n-by-n boards
   * 5-by-5
     - incorrect number of neighbors
     - student   neighbors = 0
-    - reference neighbors = 4
+    - reference neighbors = 3
     - board
         5
-        17  4  6 12 15 
-         1 24  0 23  5 
-        13  9  3 19 16 
-        20 22 11 21  7 
-        18 10  8  2 14 
+        15 10 21 18  9 
+        16 22 12  1  0 
+         3 23  2 14 20 
+         4 24 17  8  6 
+        13 11 19  7  5 
 
 
     - failed on trial 1 of 1000
@@ -496,15 +495,15 @@ Test 5b: check neighbors() with random n-by-n boards
     - reference neighbors = 3
     - board
         9
-        53  0 46 75 63 79 27 22 19 
-        37 13 41 32 30  4 47 42 76 
-         5 20 18 40 57 68 69 21  9 
-        64 29 67 16 72 70 54 24 34 
-        25  2 52 66 78 61 31 28 71 
-        39 51 73 59 23 65 48 15 60 
-        10 55  8 50 38  6 62 17 44 
-        35 11 43 58  3  1 56 49  7 
-        80 12 45 36 77 74 26 14 33 
+        62 49 28 27 26 54 19 57 61 
+        78 48 42 74 43 30 58 10  0 
+        77  7 39 72 32 11 71 25 37 
+        46 21 68 34 35 80 29 18 51 
+        33 79  6 76  4 36 55 15  8 
+        59 67  3 70 24 44 38 47 73 
+        66 40 63  5 20 65 23 75 45 
+        41 13  9 16 50  2 14 12 17 
+         1 69 52 60 53 22 56 64 31 
 
 
     - failed on trial 1 of 1000
@@ -512,19 +511,19 @@ Test 5b: check neighbors() with random n-by-n boards
   * 10-by-10
     - incorrect number of neighbors
     - student   neighbors = 0
-    - reference neighbors = 4
+    - reference neighbors = 3
     - board
         10
-        19 18 99 68 54 65 28 48 61 37 
-        64 10 25 34 11 36 67 96  5 42 
-        89 30  9 17 71 90  4 43 39 91 
-        76 49 87  3 80 75 38  8 40 56 
-        98 24 15 35 93 55 57 95 31 86 
-        69 33 82 62 70 88 41 92 52 20 
-        72 83 63 79 94  0 77 29 85 74 
-        26  2 97 14 66 47 51 53 22 23 
-        46 58 21 12 13 44 45  1 59 84 
-         6 16  7 78 73 32 60 50 27 81 
+        24 62 33 37 13 47 54 86 85 34 
+        41 46 14 82 10 83 49 64  6 74 
+        52 45 11  8 56 77 58 72 42 44 
+        81 30 65 96  2 57 50  7 99 23 
+        91 25 90  1 66 75 27 61 92 98 
+        89 12 36 22 95 93 28 17 39  0 
+        78 35 84 79 80 32 69 73 40 60 
+        38  3 21 31 43 18 59 63 53  5 
+        94 26 88 67 29 19 51  9 48 15 
+         4 68 76 20 71 97 70 87 16 55 
 
 
     - failed on trial 1 of 1000
@@ -622,8 +621,8 @@ Test 6b: check neighbors() of neighbors() with random n-by-n boards
     - reference neighbors = 4
     - board
         2
-         3  1 
-         0  2 
+         1  2 
+         3  0 
 
 
     - failed on trial 1 of 1000
@@ -634,9 +633,9 @@ Test 6b: check neighbors() of neighbors() with random n-by-n boards
     - reference neighbors = 8
     - board
         3
-         1  6  5 
-         7  8  0 
-         3  4  2 
+         4  2  5 
+         0  1  3 
+         6  7  8 
 
 
     - failed on trial 1 of 1000
@@ -644,13 +643,13 @@ Test 6b: check neighbors() of neighbors() with random n-by-n boards
   * 4-by-4
     - incorrect number of neighbors of neighbors
     - student   neighbors = 0
-    - reference neighbors = 6
+    - reference neighbors = 14
     - board
         4
-        12 15  7  4 
-        11 14  3  5 
-         9 13  1  6 
-         0  2 10  8 
+         9  8  4 10 
+         3 13  2  1 
+         5  0  7 15 
+        11 12 14  6 
 
 
     - failed on trial 1 of 1000
@@ -661,11 +660,11 @@ Test 6b: check neighbors() of neighbors() with random n-by-n boards
     - reference neighbors = 14
     - board
         5
-         9 22 11 13 16 
-        17  0  3  8 20 
-        24 12  1 23 10 
-        14 18  5 21  4 
-         2  7  6 15 19 
+        22 13  2 21  4 
+        24  0  5 10 18 
+        23 14  7  8 12 
+        20  6 19 17 11 
+        16  1  9 15  3 
 
 
     - failed on trial 1 of 1000
@@ -676,15 +675,15 @@ Test 6b: check neighbors() of neighbors() with random n-by-n boards
     - reference neighbors = 16
     - board
         9
-        18  4  8 15  1 57 59  5 53 
-        32 30 80 69 41 17 60 37 19 
-        24 78 16 31 36 77 13 58 52 
-         9 50 74 34 73 26  0 35 63 
-        38 39 49 70 61 75 11 42 45 
-        65 22 68 12 46 14 72 55 27 
-        40 23 10 21  6  7 43 66 20 
-         2 33 25 47 56 51 54 44 62 
-        29 67 79 64 71  3 76 48 28 
+        59 26 30 43 38 61 63 40 55 
+         3 35 23 46 31 28 14 36  6 
+        27 60 48 24 58 67  7 79 34 
+        57 54 19 33 11  9 44 45 12 
+        29 13 52 41 72 53 50 73 25 
+        51  5 75 78  0 42 37 74 22 
+        70 65  8 64 17 47 32 39 49 
+        20 15 10 56  1 18 62 68 16 
+         4 76 77 21 80 71  2 66 69 
 
 
     - failed on trial 1 of 1000
@@ -695,16 +694,16 @@ Test 6b: check neighbors() of neighbors() with random n-by-n boards
     - reference neighbors = 10
     - board
         10
-         2 27 64  5 61 52 74 71 29 67 
-        86  6 15 73 47 39 19  3 54 97 
-        20 57 81 14 77 25 96 82 46 75 
-        60 94 40 63 21 68 43 56 79 92 
-        80 85 45 59 72 98 10 93 58  0 
-        37 49 30 23 26 44 16 22  1 84 
-         9 53 88 95 62 17 32 66  7 83 
-        69 99 89 11 65 13 36 31 76 18 
-        33 41 91 42 38  4 87 55 50  8 
-        28 48 35 12 34 24 90 70 78 51 
+        11 35 47 12 43 87 21 83 81  5 
+        34 63 56 36 19 71 90 57  3 46 
+        26 76 61 74 49 45 24 95 68 39 
+        28 91 42 40 93 98 60 79 30  0 
+         8 78 96 85 23 20 86 29 55 94 
+        75 54 13 67 17 44 33 88 66  6 
+        25 65 64  2 70 89 53 59 38 92 
+        73 51 41 14 37 22 15 18 10 80 
+         7 52 32 72 16 50 31 77  4 97 
+        48 82 69 99 84 62 27 58  1  9 
 
 
     - failed on trial 1 of 1000
@@ -824,172 +823,24 @@ Test 10a: check equals()
   * symmetric
   * transitive
   * argument is null
-    - equals() returns true when argument is null
-    - equals() should return false
-    - failed on trial 1 of 100000
-
   * argument is of type String
-    - fails to return false when argument is of type String
-
   * Board object stored in a variable of type Object
-==> FAILED
+==> passed
 
 Test 10b: check correctness of equals() on random n-by-n boards
   * n = 2
-    - failed on trial 1 of 100
-    - student   equals() = true
-    - reference equals() = false
-    - board1
-        2
-         2  0 
-         3  1 
-    - board2
-        2
-         3  0 
-         1  2 
-
   * n = 3
-    - failed on trial 1 of 1000
-    - student   equals() = true
-    - reference equals() = false
-    - board1
-        3
-         1  7  5 
-         0  3  2 
-         6  8  4 
-    - board2
-        3
-         7  2  6 
-         5  8  1 
-         4  0  3 
-
   * n = 4
-    - failed on trial 3 of 1000
-    - student   equals() = true
-    - reference equals() = false
-    - board1
-        4
-         3  2  7  8 
-        11  0  1  5 
-         4  6 12 13 
-        15 14  9 10 
-    - board2
-        4
-         1 13  6  5 
-        10 14 15  3 
-         7 11  9  0 
-         8  4  2 12 
-
   * 5 <= n < 10
-    - failed on trial 2 of 1000
-    - student   equals() = true
-    - reference equals() = false
-    - board1
-        9
-        80 53  1 41 74 12 69 56 39 
-        16 68 30 19 28 43 49 65 78 
-        29 57 47 79 64 67 46 10 17 
-        73 18 50 25  0 23 34 37 59 
-        72  7 15 24 32 54 60 11 38 
-        42 61 21 55 63 36 13  3 76 
-         6 33 26 71 22 70  9 27 35 
-        58 77  5 45 48 52 66 40  4 
-        20  8 51 75 44 14 31 62  2 
-    - board2
-        9
-        24 23 18 70 48 12 15 28 49 
-        63 42 30 77 78 50  7  9 75 
-         1 80 56 41 10 46 43 51 55 
-        47 11 16  0 29 76 53 61 73 
-        40 13 38 31 25 62 71 27 69 
-        74  5 57 36 20  2 37 65 19 
-        26 14 64  6 34 35 32 33 22 
-        67  4 39 79 60 54 66  3 17 
-        45 44 59  8 21 58 68 72 52 
-
-==> FAILED
+==> passed
 
 Test 10c: check equals() when board sizes m and n are different
   * m = 4, n = 5
-    - failed on trial 1 of 1000
-    - student   equals() = true
-    - reference equals() = false
-    - board1
-        4
-         7 14  0  8 
-         6 13 15 11 
-         5  9  2  1 
-        12 10  4  3 
-    - board2
-        5
-         4 13 18 16 11 
-        19 21  9  6  3 
-        12 22 10 24  1 
-         8  7 15  2 23 
-        14 17 20  5  0 
-
   * m = 2, n = 5
-    - failed on trial 1 of 1000
-    - student   equals() = true
-    - reference equals() = false
-    - board1
-        2
-         3  0 
-         2  1 
-    - board2
-        5
-         8 19 18 15 11 
-         5  1 17  3 12 
-        23 24 14  2 10 
-        22 16 20  9  0 
-        13  6  7  4 21 
-
   * m = 5, n = 3
-    - failed on trial 1 of 1000
-    - student   equals() = true
-    - reference equals() = false
-    - board1
-        5
-         2  9 13 16 19 
-         5 22 17 18  7 
-        10 21  4 20  1 
-         6 15 23 12  3 
-         0 11  8 24 14 
-    - board2
-        3
-         8  3  4 
-         6  7  0 
-         5  2  1 
-
   * m = 2, n = 3
-    - failed on trial 1 of 10000
-    - student   equals() = true
-    - reference equals() = false
-    - board1
-        2
-         1  3 
-         2  0 
-    - board2
-        3
-         3  0  7 
-         6  1  5 
-         4  2  8 
-
   * m = 3, n = 2
-    - failed on trial 1 of 10000
-    - student   equals() = true
-    - reference equals() = false
-    - board1
-        3
-         7  2  6 
-         8  4  5 
-         1  0  3 
-    - board2
-        2
-         0  2 
-         3  1 
-
-==> FAILED
+==> passed
 
 Test 11: check that Board is immutable by changing argument array after
          construction and making sure Board does not mutate
@@ -1161,7 +1012,7 @@ Test 15: check manhattan() on a board that is a kth-neighbor of a board
 ==> FAILED
 
 
-Total: 10/24 tests passed!
+Total: 13/24 tests passed!
 
 
 ================================================================
@@ -1844,10 +1695,10 @@ Test 5b: call isSolvable() on random n-by-n boards
     - reference isSolvable() = true
     - board =
         2
-         2  0 
-         1  3 
+         1  0 
+         3  2 
 
-    - failed on trial 2 of 100
+    - failed on trial 1 of 100
 
 ==> FAILED
 
@@ -2166,7 +2017,156 @@ Test 11b: check solution() with 2-by-2 file inputs
 
   * puzzle2x2-03.txt
     - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution(
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle2x2-04.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle2x2-05.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle2x2-06.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+==> FAILED
+
+Test 12a: check moves() with 3-by-3 file inputs
+  * puzzle3x3-00.txt
+  * puzzle3x3-01.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 1
+    - board =
+        3
+         1  2  3 
+         4  5  0 
+         7  8  6 
+
+  * puzzle3x3-02.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 2
+    - board =
+        3
+         1  2  3 
+         4  0  5 
+         7  8  6 
+
+  * puzzle3x3-03.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 3
+    - board =
+        3
+         1  2  3 
+         0  4  5 
+         7  8  6 
+
+  * puzzle3x3-04.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 4
+    - board =
+        3
+         0  1  2 
+         4  5  3 
+         7  8  6 
+
+  * puzzle3x3-05.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 5
+    - board =
+        3
+         1  0  2 
+         4  6  3 
+         7  5  8 
+
+  * puzzle3x3-06.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 6
+    - board =
+        3
+         1  2  0 
+         4  8  3 
+         7  6  5 
+
+  * puzzle3x3-07.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 7
+    - board =
+        3
+         1  2  3 
+         0  4  8 
+         7  6  5 
+
+  * puzzle3x3-08.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 8
+    - board =
+        3
+         0  4  3 
+         2  1  6 
+         7  5  8 
+
+  * puzzle3x3-09.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 9
+    - board =
+        3
+         1  3  6 
+         5  2  8 
+         4  0  7 
+
+  * puzzle3x3-10.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 10
+    - board =
+        3
+         0  4  1 
+         5  3  2 
+         7  8  6 
+
+  * puzzle3x3-11.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 11
+    - board =
+        3
+         1  3  5 
+         7  2  6 
+         8  0  4 
+
+  * puzzle3x3-12.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 12
+    - board =
+        3
+         4  1  2 
+         3  0  6 
+         5  7  8 
+
+  * puzzle3x3-13.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference m
 
 ...
 
