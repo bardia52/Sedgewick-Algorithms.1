@@ -95,10 +95,7 @@ public class Board {
 
     // is this board the goal board?
     public boolean isGoal() {
-        if (this.hamming() == 0)
-            return true;
-        else
-            return false;
+        return (this.hamming() == 0);
     }
 
     // a board that is obtained by exchanging any pair of blocks
@@ -139,7 +136,15 @@ public class Board {
 
     // string representation of this board (in the output format specified below)
     public String toString() {
-        return "1";
+        String strBoard = String.valueOf(this.boardDim);
+        strBoard += "\n ";
+        for (int i = 0; i < this.boardDim; i++) {
+            for (int j = 0; j < this.boardDim; j++) {
+                strBoard += String.valueOf(this.internalBlocks[i][j]) + " ";
+            }
+            strBoard += "\n ";
+        }
+        return strBoard;
     }
 
     // unit tests (not graded)
@@ -161,8 +166,10 @@ public class Board {
             Board initial = new Board(tiles);
             int hammingScore = initial.hamming();
             int manhatanScore = initial.manhattan();
+            String strB = initial.toString();
             // Solver solver = new Solver(initial);
             StdOut.println(filename + ": hamming = " + hammingScore + " : mahnatan = " + manhatanScore);
+            StdOut.print(strB);
             // StdOut.println(filename + ": " + solver.moves());
         }
         return;
