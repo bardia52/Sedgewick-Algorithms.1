@@ -5,23 +5,23 @@ ASSESSMENT SUMMARY
 Compilation:  FAILED (0 errors, 2 warnings)
 API:          PASSED
 
-Spotbugs:     FAILED (5 warnings)
-PMD:          FAILED (5 warnings)
-Checkstyle:   FAILED (0 errors, 8 warnings)
+Spotbugs:     FAILED (2 warnings)
+PMD:          FAILED (4 warnings)
+Checkstyle:   FAILED (0 errors, 7 warnings)
 
-Correctness:  27/49 tests passed
+Correctness:  28/49 tests passed
 Memory:       22/22 tests passed
 Timing:       25/125 tests passed
 
-Aggregate score: 52.06%
+Aggregate score: 53.29%
 [Compilation: 5%, API: 5%, Spotbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
 
 ASSESSMENT DETAILS
 
 The following files were submitted:
 ----------------------------------
- 12K Aug 22 19:50 Board.java
-2.0K Aug 22 19:50 Solver.java
+ 12K Aug 23 05:08 Board.java
+2.0K Aug 23 05:08 Solver.java
 
 
 ********************************************************************************
@@ -67,12 +67,9 @@ Solver:
 
 % spotbugs *.class
 *-----------------------------------------------------------
-M P SBSC_USE_STRINGBUFFER_CONCATENATION SBSC: Builds a 'String' object using the '+' operator in a loop, which can take time quadratic in the length of the resulting string. Instead, use 'StringBuilder'.  At Board.java:[line 162]
-M D RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT RV: Calls the method 'hamming()' but ignores its return value. The method, however, does not produce any effect other than returning a value.  At Board.java:[line 272]
-M D RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT RV: Calls the method 'hamming()' but ignores its return value. The method, however, does not produce any effect other than returning a value.  At Board.java:[line 296]
 L P URF_UNREAD_FIELD UrF: The instance (or static) variable 'previous' is never read. Consider removing it from the class.  At Solver.java:[line 52]
 L P URF_UNREAD_FIELD UrF: The instance (or static) variable 'current' is never read. Consider removing it from the class.  At Solver.java:[line 53]
-Warnings generated: 5
+Warnings generated: 2
 
 
 ================================================================
@@ -80,12 +77,11 @@ Warnings generated: 5
 
 % pmd .
 *-----------------------------------------------------------
-Board.java:162: No need to call String.valueOf to append to a string. [UselessStringValueOf]
 Solver.java:47: Avoid unused private instance (or static) variables, such as 'previous'. [UnusedPrivateField]
 Solver.java:47: Can you replace the instance (or static) variable 'previous' with a local variable? [SingularField]
 Solver.java:48: Avoid unused private instance (or static) variables, such as 'current'. [UnusedPrivateField]
 Solver.java:48: Can you replace the instance (or static) variable 'current' with a local variable? [SingularField]
-PMD ends with 5 warnings.
+PMD ends with 4 warnings.
 
 
 ================================================================
@@ -93,15 +89,15 @@ PMD ends with 5 warnings.
 
 % checkstyle *.java
 *-----------------------------------------------------------
-[WARN] Board.java:12:1: Your program defines 2 outer types, but there should be only 1. [OuterTypeNumber]
-[WARN] Board.java:319: The .java file must have exactly one top-level class. [OneTopLevelClass]
 [WARN] Solver.java:12:1: Your program defines 3 outer types, but there should be only 1. [OuterTypeNumber]
 [WARN] Solver.java:45: The .java file must have exactly one top-level class. [OneTopLevelClass]
 [WARN] Solver.java:61: The .java file must have exactly one top-level class. [OneTopLevelClass]
-Checkstyle ends with 0 errors and 5 warnings.
+Checkstyle ends with 0 errors and 3 warnings.
 
 % custom checkstyle checks for Board.java
 *-----------------------------------------------------------
+[WARN] Board.java:16:1: Defining a nested class in this program suggests poor design. [DescendantToken]
+Checkstyle ends with 0 errors and 1 warning.
 
 % custom checkstyle checks for Solver.java
 *-----------------------------------------------------------
@@ -333,53 +329,14 @@ Test 14: check hamming() on a board that is kth-neighbor of a board
 Test 15: check manhattan() on a board that is a kth-neighbor of a board
   * 0th neighbor of puzzle27.txt
   * 1st neighbor of puzzle27.txt
-    - student   manhattan() = 32
-    - reference manhattan() = 16
-        3
-         5  8  7 
-         1  4  6 
-         0  3  2 
-
-
   * 2nd neighbor of puzzle27.txt
-    - student   manhattan() = 34
-    - reference manhattan() = 17
-        3
-         5  8  7 
-         0  4  6 
-         1  3  2 
-
-
   * 13th neighbor of puzzle27.txt
-    - student   manhattan() = 32
-    - reference manhattan() = 16
-        3
-         0  8  7 
-         5  3  6 
-         4  1  2 
-
-
   * 13th neighbor of puzzle00.txt
-    - student   manhattan() = 18
-    - reference manhattan() = 9
-        10
-         1  2  3  4  5  6  7  8  9 10 
-        11 12 13 14 15 16 17 18 19 20 
-        21 22 23 24 25 26 27 28 29 30 
-        31 32 33 34 35 36 37 38 39 40 
-        41 42 43 44 45 46 47 48 49 50 
-        51 52 53 54 55 56 57 58 59 60 
-        61 62 63 64 65 66 67  0 68 70 
-        71 72 73 74 75 76 77 78 69 80 
-        81 82 83 84 85 86 87 98 79 90 
-        91 92 93 94 95 96 97 89 88 99 
-
-
   * 13th neighbor of puzzle2x2-unsolvable1.txt
-==> FAILED
+==> passed
 
 
-Total: 23/24 tests passed!
+Total: 24/24 tests passed!
 
 
 ================================================================
@@ -397,21 +354,21 @@ Memory usage of an n-by-n board
 
               n       student (bytes)    reference (bytes)
 ----------------------------------------------------------
-=> passed     2           144                  128
-=> passed     3           208                  192
-=> passed     4           256                  240
-=> passed     8           576                  560
-=> passed    12          1024                 1008
-=> passed    16          1600                 1584
-=> passed    20          2304                 2288
-=> passed    37          6872                 6856
-=> passed    72         23104                23088
-=> passed   120         61504                61488
+=> passed     2           136                  128
+=> passed     3           200                  192
+=> passed     4           248                  240
+=> passed     8           568                  560
+=> passed    12          1016                 1008
+=> passed    16          1592                 1584
+=> passed    20          2296                 2288
+=> passed    37          6864                 6856
+=> passed    72         23096                23088
+=> passed   120         61496                61488
 ==> 10/10 tests passed
 
 Total: 10/10 tests passed!
 
-Student   memory = 4.00 n^2 + 32.00 n + 64.00   (R^2 = 1.000)
+Student   memory = 4.00 n^2 + 32.00 n + 56.00   (R^2 = 1.000)
 Reference memory = 4.00 n^2 + 32.00 n + 48.00   (R^2 = 1.000)
 
 ================================================================
@@ -1062,8 +1019,8 @@ Test 5b: call isSolvable() on random n-by-n boards
     - reference isSolvable() = true
     - board =
         2
-         2  3 
-         1  0 
+         3  1 
+         0  2 
 
     - failed on trial 1 of 100
 
@@ -2165,7 +2122,85 @@ Test 13a: check moves() with 4-by-4 file inputs
          9  5  1  2 
          6  4  8  3 
         10 14  7 11 
-        1
+        13  0 15 12 
+
+  * puzzle4x4-25.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 25
+    - board =
+        4
+         2  5  1  3 
+         9  6 12  4 
+        10 14  8  0 
+        13 11 15  7 
+
+  * puzzle4x4-26.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 26
+    - board =
+        4
+         1 10  6  4 
+         5  9  2  8 
+        13 12  0  7 
+        14 11  3 15 
+
+  * puzzle4x4-27.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 27
+    - board =
+        4
+         1  2  3  0 
+         5 12  7  4 
+        13  6 14  9 
+        10  8 11 15 
+
+  * puzzle4x4-28.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 28
+    - board =
+        4
+         2  5  4  7 
+         9  1  3  8 
+        11 10  0  6 
+        14 13 15 12 
+
+  * puzzle4x4-29.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 29
+    - board =
+        4
+         1  8  3  0 
+         5  7  4 12 
+        14  6  2 15 
+         9 13 10 11 
+
+  * puzzle4x4-30.txt
+    - moves() returns wrong value
+    - student   moves() = 0
+    - reference moves() = 30
+    - board =
+        4
+         2  4  8 12 
+         1  7  3 14 
+         0  6 15 11 
+         5  9 13 10 
+
+==> FAILED
+
+Test 13b: check solution() with 4-by-4 file inputs
+  * puzzle4x4-00.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 0
+    - moves()              = 0
+
+  * puzzle4x4-01.txt
+    - num
 
 ...
 

@@ -16,7 +16,6 @@ import edu.princeton.cs.algs4.StdOut;
 public class Board {
     private final int[][] internalBlocks;
     private final int boardDim;
-    private int manhattanScore = 0;
     private int moves = 0;
 
     // construct a board from an n-by-n array of blocks
@@ -71,7 +70,7 @@ public class Board {
 
     // sum of Manhattan distances between blocks and goal
     public int manhattan() {
-        int newScore = 0;
+        int score = 0;
         int value = 0;
         int addValue = 0;
         for (int i = 0; i < boardDim; i++) {
@@ -87,10 +86,10 @@ public class Board {
                     int jVal = (value - 1) % boardDim;
                     addValue = abs(iVal - i) + abs(jVal - j);
                 }
-                newScore += addValue;
+                score += addValue;
             }
         }
-        return (newScore + manhattanScore);
+        return score;
     }
 
     // is this board the goal board?
@@ -156,14 +155,17 @@ public class Board {
 
     // string representation of this board (in the output format specified below)
     public String toString() {
-        String strBoard = this.boardDim + "\n ";
+        String strBoard = this.boardDim + "\n";
+        StringBuilder sblBoard = new StringBuilder(strBoard);
         for (int i = 0; i < this.boardDim; i++) {
+            sblBoard.append(" ");
             for (int j = 0; j < this.boardDim; j++) {
-                strBoard += String.valueOf(this.internalBlocks[i][j]) + " ";
+                sblBoard.append(internalBlocks[i][j]);
+                sblBoard.append(" ");
             }
-            strBoard += "\n ";
+            sblBoard.append("\n");
         }
-        return strBoard;
+        return sblBoard.toString();
     }
 
     // unit tests (not graded)
@@ -269,8 +271,8 @@ public class Board {
         if (jZero > 0) {
             movedBoard.internalBlocks[iZero][jZero] = this.internalBlocks[iZero][jZero - 1];
             movedBoard.internalBlocks[iZero][jZero-1] = 0;
-            movedBoard.hamming();
-            movedBoard.manhattanScore = movedBoard.manhattan();
+            // movedBoard.hamming();
+            // movedBoard.manhattan();
         }
         return movedBoard;
     }
@@ -293,8 +295,8 @@ public class Board {
         if (iZero > 0) {
             movedBoard.internalBlocks[iZero][jZero] = this.internalBlocks[iZero - 1][jZero];
             movedBoard.internalBlocks[iZero - 1][jZero] = 0;
-            movedBoard.hamming();
-            movedBoard.manhattanScore = movedBoard.manhattan();
+            // movedBoard.hamming();
+            // movedBoard.manhattan();
         }
         return movedBoard;
     }
@@ -314,57 +316,46 @@ public class Board {
         int y = (x >= 0) ? x : -x;
         return y;
     }
-}
 
-class Point {
-    private int i;
-    private int j;
-    private final int dim;
+    private class Point {
+        private int i;
+        private int j;
+        private final int dim;
 
-    public Point(int i, int j, int dim) {
-        this.dim = dim;
-        if ((i >= 0) && (i < dim) && (j >= 0) && (j < dim)) {
-            this.i = i;
-            this.j = j;
+        public Point(int i, int j, int dim) {
+            this.dim = dim;
+            if ((i >= 0) && (i < dim) && (j >= 0) && (j < dim)) {
+                this.i = i;
+                this.j = j;
+            }
+            else {
+                throw new IllegalArgumentException("Threw an IllegalArgumentException");
+            }
         }
-        else {
-            throw new IllegalArgumentException("Threw an IllegalArgumentException");
+
+        public Point(Point p) {
+            this.dim = p.dim;
+            this.i = p.i;
+            this.j = p.j;
         }
-    }
 
-    public Point(Point p) {
-        this.dim = p.dim;
-        this.i = p.i;
-        this.j = p.j;
-    }
-
-    public int geti() {
-        return this.i;
-    }
-
-    public int getj() {
-        return this.j;
-    }
-
-    public int setPoint(Point x) {
-        if ((this.i >= 0) && (this.i < dim) && (this.j >= 0) && (this.j < dim)) {
-            this.i = x.i;
-            this.j = x.j;
-            return 0;
+        public int geti() {
+            return this.i;
         }
-        else {
-            throw new IllegalArgumentException("Threw an IllegalArgumentException");
-        }
-    }
 
-    public int setPoint(int x, int y) {
-        if ((x >= 0) && (x < this.dim) && (y >= 0) && (y < this.dim)) {
-            this.i = x;
-            this.j = y;
-            return 0;
+        public int getj() {
+            return this.j;
         }
-        else {
-            throw new IllegalArgumentException("Threw an IllegalArgumentException");
+
+        public int setPoint(int x, int y) {
+            if ((x >= 0) && (x < this.dim) && (y >= 0) && (y < this.dim)) {
+                this.i = x;
+                this.j = y;
+                return 0;
+            }
+            else {
+                throw new IllegalArgumentException("Threw an IllegalArgumentException");
+            }
         }
     }
 }
