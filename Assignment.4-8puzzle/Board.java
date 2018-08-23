@@ -16,8 +16,8 @@ import edu.princeton.cs.algs4.StdOut;
 public class Board {
     private final int[][] internalBlocks;
     private final int boardDim;
-    private int hammingScore = 0;
     private int manhattanScore = 0;
+    private int moves = 0;
 
     // construct a board from an n-by-n array of blocks
     // (where blocks[i][j] = block in row i, column j)
@@ -54,19 +54,19 @@ public class Board {
 
     // number of blocks out of place
     public int hamming() {
-        int newScore = 0;
+        int score = 0;
         int value = 0;
         int goalValue = 0;
         for (int i = 0; i < boardDim; i++) {
             for (int j = 0; j < boardDim; j++) {
                 value = internalBlocks[i][j];
                 goalValue = (i * boardDim) + j + 1;
-                newScore += (value == goalValue) ? 0 : 1;
+                score += (value == goalValue) ? 0 : 1;
             }
         }
         if (value != goalValue) // subtract last value
-            newScore--;
-        return (newScore + hammingScore);
+            score--;
+        return score;
     }
 
     // sum of Manhattan distances between blocks and goal
@@ -101,8 +101,8 @@ public class Board {
     // a board that is obtained by exchanging any pair of blocks
     public Board twin() {
         Board twinBoard = new Board(this);
-        point firstPoint = findANoneZeroPoint();
-        point secondPoint = findNextNoneZeroPoint(firstPoint);
+        Point firstPoint = findANoneZeroPoint();
+        Point secondPoint = findNextNoneZeroPoint(firstPoint);
         swapPoints(twinBoard, firstPoint, secondPoint);
         return twinBoard;
     }
@@ -136,15 +136,19 @@ public class Board {
     public Iterable<Board> neighbors() {
         Queue<Board> boards = new Queue<Board>();
         Board newBoard = moveLeft();
+        newBoard.moves = this.moves + 1;
         if (!equals(newBoard))
             boards.enqueue(newBoard);
         newBoard = moveRight();
+        newBoard.moves = this.moves + 1;
         if (!equals(newBoard))
             boards.enqueue(newBoard);
         newBoard = moveUp();
+        newBoard.moves = this.moves + 1;
         if (!equals(newBoard))
             boards.enqueue(newBoard);
         newBoard = moveDown();
+        newBoard.moves = this.moves + 1;
         if (!equals(newBoard))
             boards.enqueue(newBoard);
         return boards;
@@ -152,8 +156,7 @@ public class Board {
 
     // string representation of this board (in the output format specified below)
     public String toString() {
-        String strBoard = String.valueOf(this.boardDim);
-        strBoard += "\n ";
+        String strBoard = this.boardDim + "\n ";
         for (int i = 0; i < this.boardDim; i++) {
             for (int j = 0; j < this.boardDim; j++) {
                 strBoard += String.valueOf(this.internalBlocks[i][j]) + " ";
@@ -194,7 +197,7 @@ public class Board {
         return;
     }
 
-    private void swapPoints(Board board, point point1, point point2) {
+    private void swapPoints(Board board, Point point1, Point point2) {
         int i1 = point1.geti();
         int j1 = point1.getj();
         int i2 = point2.geti();
@@ -226,8 +229,8 @@ public class Board {
         return -1;
     }
 
-    private point findANoneZeroPoint() {
-        point noneZeroPoint = new point(0, 0, this.boardDim);
+    private Point findANoneZeroPoint() {
+        Point noneZeroPoint = new Point(0, 0, this.boardDim);
         for (int i = 0; i < this.boardDim; i++) {
             for (int j = 0; j < this.boardDim; j++) {
                 if (internalBlocks[i][j] != 0) {
@@ -239,8 +242,8 @@ public class Board {
         return noneZeroPoint;
     }
 
-    private point findNextNoneZeroPoint(point p) {
-        point nextPoint = new point(p);
+    private Point findNextNoneZeroPoint(Point p) {
+        Point nextPoint = new Point(p);
         int i = p.geti();
         int j = p.getj();
         if (checkLegit(i + 1, j))
@@ -266,7 +269,7 @@ public class Board {
         if (jZero > 0) {
             movedBoard.internalBlocks[iZero][jZero] = this.internalBlocks[iZero][jZero - 1];
             movedBoard.internalBlocks[iZero][jZero-1] = 0;
-            movedBoard.hammingScore = movedBoard.hamming();
+            movedBoard.hamming();
             movedBoard.manhattanScore = movedBoard.manhattan();
         }
         return movedBoard;
@@ -290,7 +293,7 @@ public class Board {
         if (iZero > 0) {
             movedBoard.internalBlocks[iZero][jZero] = this.internalBlocks[iZero - 1][jZero];
             movedBoard.internalBlocks[iZero - 1][jZero] = 0;
-            movedBoard.hammingScore = movedBoard.hamming();
+            movedBoard.hamming();
             movedBoard.manhattanScore = movedBoard.manhattan();
         }
         return movedBoard;
@@ -313,14 +316,14 @@ public class Board {
     }
 }
 
-class point {
+class Point {
     private int i;
     private int j;
     private final int dim;
 
-    public point (int i, int j, int dim) {
+    public Point(int i, int j, int dim) {
         this.dim = dim;
-        if ((i >= 0 ) && (i < dim) && (j >= 0) && (j < dim)) {
+        if ((i >= 0) && (i < dim) && (j >= 0) && (j < dim)) {
             this.i = i;
             this.j = j;
         }
@@ -329,7 +332,7 @@ class point {
         }
     }
 
-    public point (point p) {
+    public Point(Point p) {
         this.dim = p.dim;
         this.i = p.i;
         this.j = p.j;
@@ -343,7 +346,7 @@ class point {
         return this.j;
     }
 
-    public int setPoint(point x) {
+    public int setPoint(Point x) {
         if ((this.i >= 0) && (this.i < dim) && (this.j >= 0) && (this.j < dim)) {
             this.i = x.i;
             this.j = x.j;
@@ -355,7 +358,7 @@ class point {
     }
 
     public int setPoint(int x, int y) {
-        if ((x >= 0 ) && (x < this.dim) && (y >= 0) && (y < this.dim)) {
+        if ((x >= 0) && (x < this.dim) && (y >= 0) && (y < this.dim)) {
             this.i = x;
             this.j = y;
             return 0;
