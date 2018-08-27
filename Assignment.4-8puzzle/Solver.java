@@ -21,7 +21,6 @@ public class Solver {
     public Solver(Board initial) {
         distance = initial.manhattan();
         SearchNode firstNode = new SearchNode(distance, null, initial);
-        // minPQ = new MinPQ(firstNode);
         minPQ.insert(firstNode);
     }
 
@@ -32,35 +31,40 @@ public class Solver {
 
     // min number of moves to solve initial board; -1 if unsolvable
     public int moves() {
-        return 0;
+        return distance;
     }
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
         Queue<Board> boards = new Queue<Board>();
+        SearchNode minNode = minPQ.delMin(); 
+        Board minBoard = minNode.current;
+        for (Board aNeighbor : minBoard.neighbors()) {
+            if (!aNeighbor.equals(minNode.previous.current))
+                boards.enqueue(aNeighbor);
+        }
         return boards;
     }
-}
 
-class SearchNode {
-    private final int priority;
-    private final SearchNode previous;
-    private final Board current;
+    private class SearchNode {
+        private final int priority;
+        private final SearchNode previous;
+        private final Board current;
 
-    public SearchNode(int priority, SearchNode previous, Board current) {
-        this.priority = priority;
-        this.previous = previous;
-        this.current = current;
+        public SearchNode(int priority, SearchNode previous, Board current) {
+            this.priority = priority;
+            this.previous = previous;
+            this.current = current;
+        }
+        
+        public int getPriority() {
+            return this.priority;
+        }
     }
-    
-    public int getPriority() {
-        return this.priority;
-    }
-}
 
-class SortNode implements Comparator<SearchNode> {
-    
-    public int compare(SearchNode v, SearchNode w) {
-        return (v.getPriority() >= w.getPriority()) ? 1 : 0;
+    private class SortNode implements Comparator<SearchNode> {
+        public int compare(SearchNode v, SearchNode w) {
+            return (v.getPriority() >= w.getPriority()) ? 1 : 0;
+        }
     }
 }
