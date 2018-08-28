@@ -16,6 +16,7 @@ public class Solver {
     private final int distance;
     private final Board initial;
     private final Iterable<Board> solutionBoards;
+    private int numMoves;
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
@@ -31,10 +32,7 @@ public class Solver {
 
     // min number of moves to solve initial board; -1 if unsolvable
     public int moves() {
-        int counter = 0;
-        for (Board b : solutionBoards)
-            counter++;
-        return counter-1;
+        return numMoves;
     }
 
     // sequence of boards in a shortest solution; null if unsolvable
@@ -49,9 +47,10 @@ public class Solver {
             boards.enqueue(minBoard);
             if (minBoard.isGoal())
                 break;
-            for (Board aNeighbor : minBoard.neighbors()) {
-                if ((minNode.previous == null) || (!aNeighbor.equals(minNode.previous.current))) {
-                    SearchNode sn = new SearchNode(aNeighbor.manhattan(), minNode, aNeighbor);
+            numMoves++;
+            for (Board neighbor : minBoard.neighbors()) {
+                if ((minNode.previous == null) || (!neighbor.equals(minNode.previous.current))) {
+                    SearchNode sn = new SearchNode(neighbor.manhattan()+numMoves, minNode, neighbor);
                     pq.insert(sn);
                 }
             }

@@ -5,8 +5,8 @@ ASSESSMENT SUMMARY
 Compilation:  PASSED
 API:          PASSED
 
-Spotbugs:     PASSED
-PMD:          FAILED (1 warning)
+Spotbugs:     FAILED (1 warning)
+PMD:          FAILED (2 warnings)
 Checkstyle:   FAILED (0 errors, 1 warning)
 
 Correctness:  24/49 tests passed
@@ -20,8 +20,8 @@ ASSESSMENT DETAILS
 
 The following files were submitted:
 ----------------------------------
- 12K Aug 28 15:11 Board.java
-2.8K Aug 28 15:11 Solver.java
+ 12K Aug 28 17:43 Board.java
+2.8K Aug 28 17:43 Solver.java
 
 
 ********************************************************************************
@@ -55,6 +55,8 @@ Solver:
 
 % spotbugs *.class
 *-----------------------------------------------------------
+L P URF_UNREAD_FIELD UrF: The instance (or static) variable 'solutionBoards' is never read. Consider removing it from the class.  At Solver.java:[line 25]
+Warnings generated: 1
 
 
 ================================================================
@@ -62,8 +64,9 @@ Solver:
 
 % pmd .
 *-----------------------------------------------------------
-Solver.java:35: Avoid unused local variables, such as 'b'. [UnusedLocalVariable]
-PMD ends with 1 warning.
+Solver.java:18: Avoid unused private instance (or static) variables, such as 'solutionBoards'. [UnusedPrivateField]
+Solver.java:18: Can you replace the instance (or static) variable 'solutionBoards' with a local variable? [SingularField]
+PMD ends with 2 warnings.
 
 
 ================================================================
@@ -370,6 +373,205 @@ Test 1a: check moves() with file inputs
   * puzzle09.txt
   * puzzle10.txt
   * puzzle11.txt
+    - moves() returns wrong value
+    - student   moves() = 1434
+    - reference moves() = 11
+    - board =
+        3
+         1  0  2 
+         7  5  4 
+         8  6  3 
+
+  * puzzle12.txt
+  * puzzle13.txt
+==> FAILED
+
+Test 1b: check solution() with file inputs
+  * puzzle00.txt
+  * puzzle01.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 2
+    - moves()              = 2
+
+  * puzzle02.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 3
+    - moves()              = 4
+
+  * puzzle03.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 4
+    - moves()              = 6
+
+  * puzzle04.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 5
+    - moves()              = 8
+
+  * puzzle05.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 6
+    - moves()              = 10
+
+  * puzzle06.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 7
+    - moves()              = 12
+
+  * puzzle07.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 8
+    - moves()              = 14
+
+  * puzzle08.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 9
+    - moves()              = 16
+
+  * puzzle09.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 10
+    - moves()              = 18
+
+  * puzzle10.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 11
+    - moves()              = 20
+
+  * puzzle11.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 1435
+    - moves()              = 2868
+
+  * puzzle12.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 13
+    - moves()              = 24
+
+  * puzzle13.txt
+    - number of boards in solution() does not equal to 1 + moves()
+      (it should be 1 greater because solution() starts with the inital board)
+    - length of solution() = 14
+    - moves()              = 26
+
+==> FAILED
+
+Test 2a: check moves() with more file inputs
+  * puzzle14.txt
+    - moves() returns wrong value
+    - student   moves() = 1231364
+    - reference moves() = 14
+    - board =
+        7
+         1  2  3  4  5  7 14 
+         8  9 10 11 12 13  6 
+        15 16 17 18 19 20 21 
+        22 23 24 25 26 27 28 
+        29 30 31 32  0 33 34 
+        36 37 38 39 40 41 35 
+        43 44 45 46 47 48 42 
+
+  * puzzle15.txt
+  * puzzle16.txt
+    - moves() returns wrong value
+    - student   moves() = 290864
+    - reference moves() = 16
+    - board =
+        10
+         1  2  3  4  5  6  7  8  9 10 
+        11 12 13 14 15 16 17 18 19 20 
+        21 22 23 24 25 26 27 28 29 30 
+        31 32 33 34 35 36 47 37 39 40 
+        41 42 43 44 45 46  0 38 49 50 
+        51 52 53 54 55 56 57 48 59 60 
+        61 62 63 64 65 66 67 58 69 80 
+        71 72 73 74 75 76 77 68 70 78 
+        81 82 83 84 85 86 87 88 79 89 
+        91 92 93 94 95 96 97 98 99 90 
+
+  * puzzle17.txt
+    - moves() returns wrong value
+    - student   moves() = 18218
+    - reference moves() = 17
+    - board =
+        3
+         5  1  8 
+         2  7  3 
+         4  0  6 
+
+  * puzzle18.txt
+    - moves() returns wrong value
+    - student   moves() = 7918
+    - reference moves() = 18
+    - board =
+        3
+         5  6  2 
+         1  8  4 
+         7  3  0 
+
+  * puzzle19.txt
+    - moves() returns wrong value
+    - student   moves() = 181052
+    - reference moves() = 19
+    - board =
+        3
+         1  2  7 
+         0  4  3 
+         6  5  8 
+
+  * puzzle20.txt
+    - moves() returns wrong value
+    - student   moves() = 206051
+    - reference moves() = 20
+    - board =
+        3
+         1  6  4 
+         7  0  8 
+         2  3  5 
+
+  * puzzle21.txt
+    - moves() returns wrong value
+    - student   moves() = 64842
+    - reference moves() = 21
+    - board =
+        3
+         5  2  3 
+         4  7  0 
+         8  6  1 
+
+  * puzzle22.txt
+    - moves() returns wrong value
+    - student   moves() = 115525
+    - reference moves() = 22
+    - board =
+        3
+         4  8  2 
+         3  6  5 
+         1  7  0 
+
+  * puzzle23.txt
+    - moves() returns wrong value
+    - student   moves() = 887923
+    - reference moves() = 23
+    - board =
+        3
+         5  0  4 
+         2  3  8 
+         7  1  6 
+
+  * puzzle24.txt
     
         ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         OperationCountLimitExceededException
@@ -378,19 +580,8 @@ Test 1a: check moves() with file inputs
 
 ==> FAILED
 
-Test 1b: check solution() with file inputs
-  * puzzle00.txt
-  * puzzle01.txt
-  * puzzle02.txt
-  * puzzle03.txt
-  * puzzle04.txt
-  * puzzle05.txt
-  * puzzle06.txt
-  * puzzle07.txt
-  * puzzle08.txt
-  * puzzle09.txt
-  * puzzle10.txt
-  * puzzle11.txt
+Test 2b: check solution() with more file inputs
+  * puzzle14.txt
 
 
 Total: 0/25 tests passed: Could not complete tests, which results in a reported score of 0.
