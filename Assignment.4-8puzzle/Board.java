@@ -71,11 +71,10 @@ public class Board {
     // sum of Manhattan distances between blocks and goal
     public int manhattan() {
         int score = 0;
-        int value = 0;
-        int addValue = 0;
         for (int i = 0; i < boardDim; i++) {
             for (int j = 0; j < boardDim; j++) {
-                value = internalBlocks[i][j];
+                int addValue = 0;
+                int value = internalBlocks[i][j];
                 int goalValue = (i * boardDim) + j + 1;
                 if ((value == goalValue) || (value == 0)) {
                     addValue = 0;
@@ -271,8 +270,6 @@ public class Board {
         if (jZero > 0) {
             movedBoard.internalBlocks[iZero][jZero] = this.internalBlocks[iZero][jZero - 1];
             movedBoard.internalBlocks[iZero][jZero-1] = 0;
-            // movedBoard.hamming();
-            // movedBoard.manhattan();
         }
         return movedBoard;
     }

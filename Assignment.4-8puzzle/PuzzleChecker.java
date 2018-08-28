@@ -50,8 +50,10 @@ public class PuzzleChecker {
             Solver solver = new Solver(initial);
             Iterable<Board> solutionBoards = solver.solution();
             int count = 0;
-            for (Board b : solutionBoards)
+            for (Board b : solutionBoards) {
+                StdOut.print(count + " " + b.toString());
                 count++;
+            }
             StdOut.println(filename + ": " + solver.moves() + " : " + count);
         }
     }
