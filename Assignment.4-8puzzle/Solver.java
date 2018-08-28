@@ -14,14 +14,13 @@ import edu.princeton.cs.algs4.Queue;
 
 public class Solver {
     private final int distance;
-    private final MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
-    private Iterable<Board> solutionBoards;
+    private final Board initial;
+    private final Iterable<Board> solutionBoards;
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         distance = initial.manhattan();
-        SearchNode firstNode = new SearchNode(distance, null, initial);
-        pq.insert(firstNode);
+        this.initial = initial;
         solutionBoards = this.solution();
     }
 
@@ -35,11 +34,14 @@ public class Solver {
         int counter = 0;
         for (Board b : solutionBoards)
             counter++;
-        return counter;
+        return counter-1;
     }
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
+        MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
+        SearchNode firstNode = new SearchNode(distance, null, initial);
+        pq.insert(firstNode);
         Queue<Board> boards = new Queue<Board>();
         while (true) {
             SearchNode minNode = pq.delMin();
