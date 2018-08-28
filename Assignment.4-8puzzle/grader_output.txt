@@ -5,7 +5,7 @@ ASSESSMENT SUMMARY
 Compilation:  PASSED
 API:          PASSED
 
-Spotbugs:     FAILED (1 warning)
+Spotbugs:     PASSED
 PMD:          FAILED (2 warnings)
 Checkstyle:   FAILED (0 errors, 1 warning)
 
@@ -20,8 +20,8 @@ ASSESSMENT DETAILS
 
 The following files were submitted:
 ----------------------------------
- 12K Aug 28 17:43 Board.java
-2.8K Aug 28 17:43 Solver.java
+ 12K Aug 28 18:48 Board.java
+2.9K Aug 28 18:48 Solver.java
 
 
 ********************************************************************************
@@ -55,8 +55,6 @@ Solver:
 
 % spotbugs *.class
 *-----------------------------------------------------------
-L P URF_UNREAD_FIELD UrF: The instance (or static) variable 'solutionBoards' is never read. Consider removing it from the class.  At Solver.java:[line 25]
-Warnings generated: 1
 
 
 ================================================================
@@ -64,8 +62,8 @@ Warnings generated: 1
 
 % pmd .
 *-----------------------------------------------------------
-Solver.java:18: Avoid unused private instance (or static) variables, such as 'solutionBoards'. [UnusedPrivateField]
-Solver.java:18: Can you replace the instance (or static) variable 'solutionBoards' with a local variable? [SingularField]
+Solver.java:18: The private instance (or static) variable 'numMoves' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+Solver.java:26: Avoid unused local variables, such as 'b'. [UnusedLocalVariable]
 PMD ends with 2 warnings.
 
 
@@ -389,83 +387,29 @@ Test 1a: check moves() with file inputs
 Test 1b: check solution() with file inputs
   * puzzle00.txt
   * puzzle01.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 2
-    - moves()              = 2
-
   * puzzle02.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 3
-    - moves()              = 4
-
   * puzzle03.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 4
-    - moves()              = 6
-
   * puzzle04.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 5
-    - moves()              = 8
-
   * puzzle05.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 6
-    - moves()              = 10
-
   * puzzle06.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 7
-    - moves()              = 12
-
   * puzzle07.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 8
-    - moves()              = 14
-
   * puzzle08.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 9
-    - moves()              = 16
-
   * puzzle09.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 10
-    - moves()              = 18
-
   * puzzle10.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 11
-    - moves()              = 20
-
   * puzzle11.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 1435
-    - moves()              = 2868
+    - boards 6 and 7 in student solution() are not neighbors
+        3
+         1  2  4 
+         0  5  3 
+         7  8  6 
+
+        3
+         0  1  2 
+         7  5  4 
+         8  6  3 
 
   * puzzle12.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 13
-    - moves()              = 24
-
   * puzzle13.txt
-    - number of boards in solution() does not equal to 1 + moves()
-      (it should be 1 greater because solution() starts with the inital board)
-    - length of solution() = 14
-    - moves()              = 26
-
 ==> FAILED
 
 Test 2a: check moves() with more file inputs

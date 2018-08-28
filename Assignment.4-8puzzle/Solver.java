@@ -14,15 +14,18 @@ import edu.princeton.cs.algs4.Queue;
 
 public class Solver {
     private final int distance;
-    private final Board initial;
-    private final Iterable<Board> solutionBoards;
+    private final Board initBoard;
     private int numMoves;
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         distance = initial.manhattan();
-        this.initial = initial;
-        solutionBoards = this.solution();
+        initBoard = initial;
+        numMoves = 0;
+        Iterable<Board> solutionBoards = solution();
+        for (Board b : solutionBoards)
+            numMoves++;
+        numMoves--;
     }
 
     // is the initial board solvable?
@@ -38,19 +41,20 @@ public class Solver {
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
         MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
-        SearchNode firstNode = new SearchNode(distance, null, initial);
+        SearchNode firstNode = new SearchNode(distance, null, initBoard);
         pq.insert(firstNode);
         Queue<Board> boards = new Queue<Board>();
+        int count = 0;
         while (true) {
             SearchNode minNode = pq.delMin();
             Board minBoard = minNode.current;
             boards.enqueue(minBoard);
             if (minBoard.isGoal())
                 break;
-            numMoves++;
+            count++;
             for (Board neighbor : minBoard.neighbors()) {
                 if ((minNode.previous == null) || (!neighbor.equals(minNode.previous.current))) {
-                    SearchNode sn = new SearchNode(neighbor.manhattan()+numMoves, minNode, neighbor);
+                    SearchNode sn = new SearchNode(neighbor.manhattan()+count, minNode, neighbor);
                     pq.insert(sn);
                 }
             }

@@ -48,7 +48,11 @@ public class PuzzleChecker {
             // solve the slider puzzle
             Board initial = new Board(tiles);
             Solver solver = new Solver(initial);
-            StdOut.println(filename + ": " + solver.moves());
+            Iterable<Board> solutionBoards = solver.solution();
+            int count = 0;
+            for (Board b : solutionBoards)
+                count++;
+            StdOut.println(filename + ": " + solver.moves() + " : " + count);
         }
     }
 }
