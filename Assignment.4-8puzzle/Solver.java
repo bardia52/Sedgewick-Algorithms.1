@@ -10,7 +10,9 @@
  *  Description: A data-type to represent board having the 8-puzzle (n^2-1) puzzle.
  ******************************************************************************/
 import edu.princeton.cs.algs4.MinPQ;
-import edu.princeton.cs.algs4.Queue;
+//import edu.princeton.cs.algs4.Queue;
+import edu.princeton.cs.algs4.Stack;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Solver {
     private final int distance;
@@ -43,18 +45,33 @@ public class Solver {
         MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
         SearchNode firstNode = new SearchNode(distance, null, initBoard);
         pq.insert(firstNode);
-        Queue<Board> boards = new Queue<Board>();
+        //Queue<Board> boards = new Queue<Board>();
+        Stack<Board> boards = new Stack<Board>();
         int count = 0;
         while (true) {
             SearchNode minNode = pq.delMin();
             Board minBoard = minNode.current;
-            boards.enqueue(minBoard);
+            // Check to see if in the same path
+            if (minNode.previous != null) {
+                Board lastBoard = boards.pop();
+                if (!minNode.previous.current.equals(lastBoard)) {
+                    // Go back till get the parent path
+                    while (!minNode.previous.current.equals(lastBoard)) {
+                        lastBoard = boards.pop();
+                        count--;
+                    }
+                }
+                boards.push(lastBoard);
+                count++;
+            }
+            boards.push(minBoard);
             if (minBoard.isGoal())
                 break;
+            StdOut.print(boards.size() + ": " + minBoard.manhattan() + " - " + minBoard.toString());
             count++;
             for (Board neighbor : minBoard.neighbors()) {
                 if ((minNode.previous == null) || (!neighbor.equals(minNode.previous.current))) {
-                    SearchNode sn = new SearchNode(neighbor.manhattan()+count, minNode, neighbor);
+                    SearchNode sn = new SearchNode(neighbor.manhattan()+boards.size(), minNode, neighbor);
                     pq.insert(sn);
                 }
             }

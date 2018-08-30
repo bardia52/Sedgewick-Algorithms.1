@@ -51,7 +51,7 @@ public class PuzzleChecker {
             Iterable<Board> solutionBoards = solver.solution();
             int count = 0;
             for (Board b : solutionBoards) {
-                StdOut.print(count + " " + b.toString());
+                StdOut.print(count + ": " + b.manhattan() + " - " + b.toString());
                 count++;
             }
             StdOut.println(filename + ": " + solver.moves() + " : " + count);
