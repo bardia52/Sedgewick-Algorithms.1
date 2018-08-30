@@ -47,28 +47,27 @@ public class Solver {
         pq.insert(firstNode);
         //Queue<Board> boards = new Queue<Board>();
         Stack<Board> boards = new Stack<Board>();
-        int count = 0;
         while (true) {
             SearchNode minNode = pq.delMin();
-            Board minBoard = minNode.current;
             // Check to see if in the same path
             if (minNode.previous != null) {
                 Board lastBoard = boards.pop();
                 if (!minNode.previous.current.equals(lastBoard)) {
                     // Go back till get the parent path
                     while (!minNode.previous.current.equals(lastBoard)) {
-                        lastBoard = boards.pop();
-                        count--;
+                        if (boards.size() > 0)
+                            lastBoard = boards.pop();
+                        else
+                            minNode = minNode.previous;
                     }
                 }
                 boards.push(lastBoard);
-                count++;
             }
+            Board minBoard = minNode.current;
             boards.push(minBoard);
             if (minBoard.isGoal())
                 break;
             StdOut.print(boards.size() + ": " + minBoard.manhattan() + " - " + minBoard.toString());
-            count++;
             for (Board neighbor : minBoard.neighbors()) {
                 if ((minNode.previous == null) || (!neighbor.equals(minNode.previous.current))) {
                     SearchNode sn = new SearchNode(neighbor.manhattan()+boards.size(), minNode, neighbor);
