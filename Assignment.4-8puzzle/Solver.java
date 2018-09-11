@@ -12,19 +12,45 @@
 import edu.princeton.cs.algs4.MinPQ;
 // import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.Stack;
-// import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Solver {
     private final int distance;
     private final Board initBoard;
-    private int numMoves;
+    private final Stack<Board> boards;
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
+        boards = new Stack<Board>();
         distance = initial.manhattan();
         initBoard = initial;
-        numMoves = 0;
-        // Iterable<Board> solutionBoards = solution();
+
+        MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
+        SearchNode firstNode = new SearchNode(initBoard, 0, null);
+        pq.insert(firstNode);
+        while (true) {
+            SearchNode minNode = pq.delMin();
+            // Check to see if in the same path
+            Board minBoard = minNode.board;
+            // reversedBoards.push(minBoard);
+            if (minBoard.isGoal()) {
+                this.boards.push(minBoard);
+                while (minNode.previous != null) {
+                    minNode = minNode.previous;
+                    this.boards.push(minNode.board);
+                }
+                return;
+            }
+            minNode.moves++;
+            // StdOut.print(minNode.moves + ": " + minBoard.manhattan() + " - " + minBoard.toString());
+            Iterable<Board> neighbors = minBoard.neighbors();
+            for (Board neighbor : neighbors) {
+                if ((minNode.previous == null) || (!neighbor.equals(minNode.previous.board))) {
+                    SearchNode sn = new SearchNode(neighbor, minNode.moves, minNode);
+                    pq.insert(sn);
+                }
+            }
+        }
     }
 
     // is the initial board solvable?
@@ -34,76 +60,36 @@ public class Solver {
 
     // min number of moves to solve initial board; -1 if unsolvable
     public int moves() {
-        Iterable<Board> boards = solution();
-        Stack<Board> stackBoards = (Stack<Board>) boards;
-        numMoves = stackBoards.size();
-        return numMoves-1;
+        return boards.size() - 1;
     }
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
-        MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
-        SearchNode firstNode = new SearchNode(distance, null, initBoard);
-        pq.insert(firstNode);
-        // Queue<Board> boards = new Queue<Board>();
-        Stack<Board> reversedBoards = new Stack<Board>();
-        while (true) {
-            SearchNode minNode = pq.delMin();
-            // Check to see if in the same path
-            if (minNode.previous != null) {
-                Board lastBoard = reversedBoards.pop();
-                if (!minNode.previous.current.equals(lastBoard)) {
-                    // Go back till get the parent path
-                    while (!minNode.previous.current.equals(lastBoard)) {
-                        if (reversedBoards.size() > 0)
-                            lastBoard = reversedBoards.pop();
-                        else
-                            minNode = minNode.previous;
-                    }
-                }
-                reversedBoards.push(lastBoard);
-            }
-            Board minBoard = minNode.current;
-            reversedBoards.push(minBoard);
-            if (minBoard.isGoal())
-                break;
-            // StdOut.print(reversedBoards.size() + ": " + minBoard.manhattan() + " - " + minBoard.toString());
-            for (Board neighbor : minBoard.neighbors()) {
-                if ((minNode.previous == null) || (!neighbor.equals(minNode.previous.current))) {
-                    SearchNode sn = new SearchNode(neighbor.manhattan()+reversedBoards.size(), minNode, neighbor);
-                    pq.insert(sn);
-                }
-            }
-        }
-        // Reverse the order
-        Stack<Board> boards = new Stack<Board>();
-        while (!reversedBoards.isEmpty()) {
-            boards.push(reversedBoards.pop());
-        }
-        return boards;
+        return this.boards;
     }
 
     private class SearchNode implements Comparable<SearchNode> {
         private final int priority;
         private final SearchNode previous;
-        private final Board current;
+        private final Board board;
+        private int moves;
 
-        public SearchNode(int priority, SearchNode previous, Board current) {
-            this.priority = priority;
+        public SearchNode(Board board, int moves, SearchNode previous) {
+            this.board = board;
+            this.moves = moves;
             this.previous = previous;
-            this.current = current;
-        }
-        
-        public int compare(SearchNode v, SearchNode w) {
-            return (v.getPriority() >= w.getPriority()) ? 1 : 0;
+            this.priority = this.moves + board.manhattan();
         }
 
-        public int compareTo(SearchNode sn) {
-            return compare(this, sn);
-        }
-
-        public int getPriority() {
-            return this.priority;
+        @Override
+        public int compareTo(SearchNode that) {
+            if (this.priority < that.priority) {
+                return -1;
+            }
+            if (this.priority > that.priority) {
+                return +1;
+            }
+            return 0;
         }
     }
 }
