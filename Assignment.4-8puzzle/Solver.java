@@ -10,22 +10,20 @@
  *  Description: A data-type to represent board having the 8-puzzle (n^2-1) puzzle.
  ******************************************************************************/
 import edu.princeton.cs.algs4.MinPQ;
-// import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.Stack;
-//import edu.princeton.cs.algs4.StdOut;
 
 public class Solver {
     private final boolean solvable;    // Is this board solvable or not
-    private final Board initBoard;     // Initial board
     private final Stack<Board> boards; // Sequence of boards
-    private final Board twinBoard;     // Twin of the initial board
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
+        if (initial == null) {
+            throw new IllegalArgumentException("Null Entry");
+        }
         boards = new Stack<Board>();
-        initial.manhattan();
-        initBoard = initial;
-        twinBoard = initBoard.twin();
+        Board initBoard = initial;
+        Board twinBoard = initBoard.twin();
 
         // Do everything the same for twin board
         MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
@@ -53,8 +51,8 @@ public class Solver {
                 this.solvable = true;
                 return;
             }
-            minNode.moves++;
-            minNodeTwin.moves++;
+            minNode.addMoves();
+            minNodeTwin.addMoves();
             Iterable<Board> neighbors = minBoard.neighbors();
             for (Board neighbor : neighbors) {
                 if ((minNode.previous == null) || (!neighbor.equals(minNode.previous.board))) {
@@ -84,7 +82,10 @@ public class Solver {
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
-        return this.boards;
+        if (solvable)
+            return this.boards;
+        else
+            return null;
     }
 
     private class SearchNode implements Comparable<SearchNode> {
@@ -98,6 +99,10 @@ public class Solver {
             this.moves = moves;
             this.previous = previous;
             this.priority = this.moves + board.manhattan();
+        }
+
+        public void addMoves() {
+            this.moves++;
         }
 
         @Override
