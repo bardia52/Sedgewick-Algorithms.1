@@ -15,8 +15,8 @@ import edu.princeton.cs.algs4.RectHV;
 // import edu.princeton.cs.algs4.SET;
 import edu.princeton.cs.algs4.Queue;
 
-public class PointSET {
-    public PointSET() {                           // construct an empty set of points
+public class KdTree {
+    public KdTree() {                             // construct an empty set of points
     }
 
     public boolean isEmpty() {                    // is the set empty?
