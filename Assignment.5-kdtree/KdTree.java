@@ -12,15 +12,17 @@
 
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
-// import edu.princeton.cs.algs4.SET;
+import edu.princeton.cs.algs4.SET;
 import edu.princeton.cs.algs4.Queue;
 
 public class KdTree {
+    private SET<Point2D> pointTree;
     private int numPoints;
 
     // construct an empty set of points
     public KdTree() {
         this.numPoints = 0;
+        this.pointTree = new SET<Point2D>();
     }
 
     // is the set empty?

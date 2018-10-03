@@ -5,9 +5,9 @@ ASSESSMENT SUMMARY
 Compilation:  PASSED
 API:          PASSED
 
-Spotbugs:     PASSED
-PMD:          PASSED
-Checkstyle:   FAILED (2 errors, 0 warnings)
+Spotbugs:     FAILED (2 warnings)
+PMD:          FAILED (14 warnings)
+Checkstyle:   FAILED (1 error, 1 warning)
 
 Correctness:  No tests available for autograding.
 Memory:       No tests available for autograding.
@@ -20,8 +20,8 @@ ASSESSMENT DETAILS
 
 The following files were submitted:
 ----------------------------------
-1.6K Oct  1 05:13 KdTree.java
-1.6K Oct  1 05:13 PointSET.java
+1.7K Oct  3 00:42 KdTree.java
+1.7K Oct  3 00:42 PointSET.java
 
 
 ********************************************************************************
@@ -55,6 +55,9 @@ KdTree:
 
 % spotbugs *.class
 *-----------------------------------------------------------
+M P URF_UNREAD_FIELD UrF: The instance (or static) variable 'pointTree' is never read. Consider removing it from the class.  At PointSET.java:[line 25]
+M P URF_UNREAD_FIELD UrF: The instance (or static) variable 'pointTree' is never read. Consider removing it from the class.  At KdTree.java:[line 25]
+Warnings generated: 2
 
 
 ================================================================
@@ -62,6 +65,21 @@ KdTree:
 
 % pmd .
 *-----------------------------------------------------------
+KdTree.java:19: Avoid unused private instance (or static) variables, such as 'pointTree'. [UnusedPrivateField]
+KdTree.java:19: Can you replace the instance (or static) variable 'pointTree' with a local variable? [SingularField]
+KdTree.java:19: The private instance (or static) variable 'pointTree' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+KdTree.java:20: The private instance (or static) variable 'numPoints' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+KdTree.java:39: The method body is empty. If this is your intent, document it with a comment. [UncommentedEmptyMethodBody]
+KdTree.java:48: The method body is empty. If this is your intent, document it with a comment. [UncommentedEmptyMethodBody]
+KdTree.java:63: The method body is empty. If this is your intent, document it with a comment. [UncommentedEmptyMethodBody]
+PointSET.java:19: Avoid unused private instance (or static) variables, such as 'pointTree'. [UnusedPrivateField]
+PointSET.java:19: Can you replace the instance (or static) variable 'pointTree' with a local variable? [SingularField]
+PointSET.java:19: The private instance (or static) variable 'pointTree' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+PointSET.java:20: The private instance (or static) variable 'numPoints' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+PointSET.java:39: The method body is empty. If this is your intent, document it with a comment. [UncommentedEmptyMethodBody]
+PointSET.java:48: The method body is empty. If this is your intent, document it with a comment. [UncommentedEmptyMethodBody]
+PointSET.java:63: The method body is empty. If this is your intent, document it with a comment. [UncommentedEmptyMethodBody]
+PMD ends with 14 warnings.
 
 
 ================================================================
@@ -72,13 +90,12 @@ KdTree:
 
 % custom checkstyle checks for PointSET.java
 *-----------------------------------------------------------
-[ERROR] PointSET.java:13: You must use a red–black BST in this program [Design]
-Checkstyle ends with 1 error and 0 warnings.
 
 % custom checkstyle checks for KdTree.java
 *-----------------------------------------------------------
 [ERROR] KdTree.java:1: You must declare a nested class to represent kd-tree nodes. [Design]
-Checkstyle ends with 1 error and 0 warnings.
+[WARN] KdTree.java:19:13: You should not need to use the 'SET' data type in this program. [IllegalType]
+Checkstyle ends with 1 error and 1 warning.
 
 
 ================================================================
