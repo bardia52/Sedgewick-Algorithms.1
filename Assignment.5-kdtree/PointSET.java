@@ -60,7 +60,22 @@ public class PointSET {
 
     // a nearest neighbor in the set to point p; null if the set is empty
     public Point2D nearest(Point2D p) {
-        return p;
+        double minDistance = 2;
+        Point2D minPoint = p;
+        for (Point2D neighbor : pointTree) {
+            double curDistance = distance(p, neighbor);
+            if (curDistance < minDistance) {
+                minDistance = curDistance;
+                minPoint = neighbor;
+            }
+        }
+        return minPoint;
+    }
+
+    private double distance(Point2D p1, Point2D p2) {
+        double xD = p1.x() - p2.x();
+        double yD = p1.y() - p2.y();
+        return (xD*xD) + (yD*yD);
     }
 
     // unit testing of the methods (optional)
