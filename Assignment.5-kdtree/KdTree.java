@@ -16,13 +16,39 @@ import edu.princeton.cs.algs4.SET;
 import edu.princeton.cs.algs4.Queue;
 
 public class KdTree {
-    private SET<Point2D> pointTree;
+    private SET<kdTreeNode> pointTree;
     private int numPoints;
+
+    private class kdTreeNode implements Comparable<kdTreeNode> {
+        private boolean xAxis;
+        private Point2D point;
+        kdTreeNode left;
+        kdTreeNode right;
+
+        public kdTreeNode(Point2D p) {
+            this.point = p;
+            this.left = null;
+            this.right = null;
+        }
+
+        public int compareTo(kdTreeNode that) {
+            if (xAxis) {
+                if (this.point.x() < that.point.x()) return -1;
+                else if (this.point.x() < that.point.x()) return +1;
+                else return 0;
+            }
+            else {
+                if (this.point.y() < that.point.y()) return -1;
+                else if (this.point.y() < that.point.y()) return +1;
+                else return 0;
+            }
+        }
+    }
 
     // construct an empty set of points
     public KdTree() {
         this.numPoints = 0;
-        this.pointTree = new SET<Point2D>();
+        this.pointTree = new SET<kdTreeNode>();
     }
 
     // is the set empty?
