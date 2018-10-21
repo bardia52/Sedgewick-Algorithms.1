@@ -37,8 +37,10 @@ public class PointSET {
 
     // add the point to the set (if it is not already in the set)
     public void insert(Point2D p) {
-        if (!pointTree.contains(p))
+        if (!pointTree.contains(p)) {
             pointTree.add(p);
+            numPoints++;
+        }
     }
 
     // does the set contain point p?
