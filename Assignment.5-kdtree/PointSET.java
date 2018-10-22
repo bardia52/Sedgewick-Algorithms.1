@@ -54,8 +54,12 @@ public class PointSET {
 
     // all points that are inside the rectangle (or on the boundary)
     public Iterable<Point2D> range(RectHV rect) {
-        Queue<Point2D> p2 = new Queue<Point2D>();
-        return p2;
+        Queue<Point2D> containedPoints = new Queue<Point2D>();
+        for (Point2D currPoint : pointTree) {
+            if (rect.contains(currPoint))
+                containedPoints.enqueue(currPoint);
+        }
+        return containedPoints;
     }
 
     // a nearest neighbor in the set to point p; null if the set is empty
@@ -63,9 +67,9 @@ public class PointSET {
         double minDistance = 2;
         Point2D minPoint = p;
         for (Point2D neighbor : pointTree) {
-            double curDistance = distance(p, neighbor);
-            if (curDistance < minDistance) {
-                minDistance = curDistance;
+            double currDistance = distance(p, neighbor);
+            if (currDistance < minDistance) {
+                minDistance = currDistance;
                 minPoint = neighbor;
             }
         }
