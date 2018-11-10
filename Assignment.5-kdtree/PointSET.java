@@ -16,7 +16,7 @@ import edu.princeton.cs.algs4.SET;
 import edu.princeton.cs.algs4.Queue;
 
 public class PointSET {
-    private SET<Point2D> pointTree;
+    private final SET<Point2D> pointTree;
     private int numPoints;
 
     // construct an empty set of points
@@ -50,6 +50,7 @@ public class PointSET {
 
     // draw all points to standard draw
     public void draw() {
+        /// @to-do: Fill this 
     }
 
     // all points that are inside the rectangle (or on the boundary)
@@ -86,5 +87,6 @@ public class PointSET {
 
     // unit testing of the methods (optional)
     public static void main(String[] args) {
+        /// @to-do: Fill this 
     }
 }
