@@ -64,6 +64,8 @@ public class PointSET {
 
     // a nearest neighbor in the set to point p; null if the set is empty
     public Point2D nearest(Point2D p) {
+        if (this.isEmpty())
+            return null;
         double minDistance = 2;
         Point2D minPoint = p;
         for (Point2D neighbor : pointTree) {
