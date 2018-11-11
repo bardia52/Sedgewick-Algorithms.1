@@ -12,7 +12,7 @@
 
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
-import edu.princeton.cs.algs4.SET;
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Queue;
 
 public class KdTree {
@@ -25,8 +25,8 @@ public class KdTree {
         KdTreeNode left;
         KdTreeNode right;
 
-        public KdTreeNode(Point2D p) {
-            this.isXAxis = true;
+        public KdTreeNode(Point2D p, boolean xAxis) {
+            this.isXAxis = xAxis;
             this.point = p;
             this.left = null;
             this.right = null;
@@ -65,11 +65,34 @@ public class KdTree {
     // add the point to the set (if it is not already in the set)
     /// @Todo: Fill this
     public void insert(Point2D p) {
-        if (!contains(p)) {
-            //KdTreeNode newNode = new KdTreeNode(p);
-            //pointTree.add(newNode);
+        if ((p != null) && !contains(p)) {
+            root = insert(root, p, true);
             numPoints++;
         }
+    }
+
+    private KdTreeNode insert(KdTreeNode node, Point2D p, boolean isXAxis) {
+        if (node == null) {
+            KdTreeNode newNode = new KdTreeNode(p,isXAxis);
+            return newNode;
+        }
+        else if (isXAxis) {
+            if (p.x() < node.point.x()) {
+                node.left = insert(node.left, p, !isXAxis);
+            }
+            else {
+                node.right = insert(node.right, p, !isXAxis);
+            }
+        }
+        else {
+            if (p.y() < node.point.y()) {
+                node.left = insert(node.left, p, !isXAxis);
+            }
+            else {
+                node.right = insert(node.right, p, !isXAxis);
+            }
+        }
+        return node;
     }
 
     // does the set contain point p?
@@ -124,6 +147,16 @@ public class KdTree {
 
     // unit testing of the methods (optional)
     public static void main(String[] args) {
-        /// @to-do: Fill this 
+        /// @to-do: Fill this
+        KdTree initial = new KdTree();
+        Point2D p = new Point2D(0,0);
+        int treeSize = initial.size();
+        StdOut.printf("size 1 = %d \n", treeSize);
+        initial.insert(p);
+        treeSize = initial.size();
+        StdOut.printf("size 1 = %d \n", treeSize);
+        initial.insert(p);
+        treeSize = initial.size();
+        StdOut.printf("size 1 = %d \n", treeSize);
     }
 }
