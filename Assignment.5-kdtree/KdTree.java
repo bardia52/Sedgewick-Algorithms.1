@@ -107,7 +107,7 @@ public class KdTree {
             return false;
         int cmpX = Double.compare(p.x(), node.point.x());
         int cmpY = Double.compare(p.y(), node.point.y());
-        if ((cmpX==0) && (cmpY==0)) {
+        if ((cmpX == 0) && (cmpY == 0)) {
             return true;
         }
         else {
@@ -130,16 +130,65 @@ public class KdTree {
         }
     }
 
+    private int intersects(RectHV rect, KdTreeNode node) {
+        if (node.isXAxis) {
+            if (rect.xmax() < node.point.x())
+                return -1;
+            else if (rect.xmin() > node.point.x())
+                return 1;
+            else
+                return 0;
+        }
+        else {
+            if (rect.ymax() < node.point.y())
+                return -1;
+            else if (rect.ymin() > node.point.y())
+                return 1;
+            else
+                return 0;
+        }
+    }
+
     // draw all points to standard draw
     public void draw() {
         /// @to-do: Fill this 
     }
 
     // all points that are inside the rectangle (or on the boundary)
-    /// @Todo: Fill this
     public Iterable<Point2D> range(RectHV rect) {
-        Queue<Point2D> p2 = new Queue<Point2D>();
-        return p2;
+        return range(root, rect);
+    }
+
+    private Iterable<Point2D> range(KdTreeNode node, RectHV rect) {
+        if (node == null)
+            return null;
+        Queue<Point2D> containedPoints = new Queue<Point2D>();
+        if (rect.contains(node.point))
+            containedPoints.enqueue(node.point);
+
+        if (intersects(rect, node) == 1) {
+            Iterable<Point2D> rightSet = range(node.right, rect);
+            if (rightSet != null)
+                for (Point2D point : rightSet)
+                    containedPoints.enqueue(point);
+        }
+        else if (intersects(rect, node) == -1) {
+            Iterable<Point2D> leftSet = range(node.left, rect);
+            if (leftSet != null)
+                for (Point2D point : leftSet)
+                    containedPoints.enqueue(point);
+        }
+        else {
+            Iterable<Point2D> leftSet = range(node.left, rect);
+            if (leftSet != null)
+                for (Point2D point : leftSet)
+                    containedPoints.enqueue(point);
+            Iterable<Point2D> rightSet = range(node.right, rect);
+            if (rightSet != null)
+                for (Point2D point : rightSet)
+                    containedPoints.enqueue(point);
+        }
+        return containedPoints;
     }
 
     // a nearest neighbor in the set to point p; null if the set is empty
@@ -151,27 +200,40 @@ public class KdTree {
     // unit testing of the methods (optional)
     public static void main(String[] args) {
         /// @to-do: Fill this
-        KdTree initial = new KdTree();
-        StdOut.printf("size 0 = %d \n", initial.size());
-        initial.insert(new Point2D(0.75,0.875));
-        StdOut.printf("size A = %d \n", initial.size());
-        initial.insert(new Point2D(0.875,0.75));
-        StdOut.printf("size B = %d \n", initial.size());
-        initial.insert(new Point2D(0.875,0.125));
-        StdOut.printf("size C = %d \n", initial.size());
-        initial.insert(new Point2D(0.375,0.25));
-        StdOut.printf("size D = %d \n", initial.size());
-        initial.insert(new Point2D(0.5,0.75));
-        StdOut.printf("size E = %d \n", initial.size());
-        initial.insert(new Point2D(0.625,0.25));
-        StdOut.printf("size F = %d \n", initial.size());
-        initial.insert(new Point2D(0.0,0.375));
-        StdOut.printf("size G = %d \n", initial.size());
-        initial.insert(new Point2D(0.875,0.5));
-        StdOut.printf("size H = %d \n", initial.size());
-        initial.insert(new Point2D(0.375,0.125));
-        StdOut.printf("size I = %d \n", initial.size());
-        initial.insert(new Point2D(0.375,0.125));
-        StdOut.printf("size J = %d \n", initial.size());
+        KdTree myTree = new KdTree();
+        StdOut.printf("size 0 = %d \n", myTree.size());
+//        myTree.insert(new Point2D(0.75,0.875));
+//        StdOut.printf("size A = %d \n", myTree.size());
+//        myTree.insert(new Point2D(0.875,0.75));
+//        StdOut.printf("size B = %d \n", myTree.size());
+//        myTree.insert(new Point2D(0.875,0.125));
+//        StdOut.printf("size C = %d \n", myTree.size());
+//        myTree.insert(new Point2D(0.375,0.25));
+//        StdOut.printf("size D = %d \n", myTree.size());
+//        myTree.insert(new Point2D(0.5,0.75));
+//        StdOut.printf("size E = %d \n", myTree.size());
+//        myTree.insert(new Point2D(0.625,0.25));
+//        StdOut.printf("size F = %d \n", myTree.size());
+//        myTree.insert(new Point2D(0.0,0.375));
+//        StdOut.printf("size G = %d \n", myTree.size());
+//        myTree.insert(new Point2D(0.875,0.5));
+//        StdOut.printf("size H = %d \n", myTree.size());
+//        myTree.insert(new Point2D(0.375,0.125));
+//        StdOut.printf("size I = %d \n", myTree.size());
+//        myTree.insert(new Point2D(0.375,0.125));
+//        StdOut.printf("size J = %d \n", myTree.size());
+
+        myTree.insert(new Point2D(0.7, 0.2));
+        StdOut.printf("size A = %d \n", myTree.size());
+        myTree.insert(new Point2D(0.5, 0.4));
+        StdOut.printf("size B = %d \n", myTree.size());
+        myTree.insert(new Point2D(0.2, 0.3));
+        StdOut.printf("size C = %d \n", myTree.size());
+        myTree.insert(new Point2D(0.4, 0.7));
+        StdOut.printf("size D = %d \n", myTree.size());
+        myTree.insert(new Point2D(0.9, 0.6));
+        StdOut.printf("size E = %d \n", myTree.size());
+
+        StdOut.printf("Range for [0.378, 0.69] x [0.667, 0.958]: %s", myTree.range(new RectHV(0.378, 0.39, 0.667, 0.958)));
     }
 }
