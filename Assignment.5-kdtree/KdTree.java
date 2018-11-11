@@ -14,6 +14,7 @@ import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Queue;
+import java.lang.Double;
 
 public class KdTree {
     private int numPoints;
@@ -104,12 +105,14 @@ public class KdTree {
     private boolean contains(KdTreeNode node, Point2D p, boolean isXAxis) {
         if (node == null)
             return false;
-        else if (node.point == p) {
+        int cmpX = Double.compare(p.x(), node.point.x());
+        int cmpY = Double.compare(p.y(), node.point.y());
+        if ((cmpX==0) && (cmpY==0)) {
             return true;
         }
         else {
             if (isXAxis) {
-                if (p.x() < node.point.x()) {
+                if (cmpX < 0) {
                     return contains(node.left, p, !isXAxis);
                 }
                 else {
@@ -117,7 +120,7 @@ public class KdTree {
                 }
             }
             else {
-                if (p.x() < node.point.y()) {
+                if (cmpY < 0) {
                     return contains(node.left, p, !isXAxis);
                 }
                 else {
@@ -149,14 +152,26 @@ public class KdTree {
     public static void main(String[] args) {
         /// @to-do: Fill this
         KdTree initial = new KdTree();
-        Point2D p = new Point2D(0,0);
-        int treeSize = initial.size();
-        StdOut.printf("size 1 = %d \n", treeSize);
-        initial.insert(p);
-        treeSize = initial.size();
-        StdOut.printf("size 1 = %d \n", treeSize);
-        initial.insert(p);
-        treeSize = initial.size();
-        StdOut.printf("size 1 = %d \n", treeSize);
+        StdOut.printf("size 0 = %d \n", initial.size());
+        initial.insert(new Point2D(0.75,0.875));
+        StdOut.printf("size A = %d \n", initial.size());
+        initial.insert(new Point2D(0.875,0.75));
+        StdOut.printf("size B = %d \n", initial.size());
+        initial.insert(new Point2D(0.875,0.125));
+        StdOut.printf("size C = %d \n", initial.size());
+        initial.insert(new Point2D(0.375,0.25));
+        StdOut.printf("size D = %d \n", initial.size());
+        initial.insert(new Point2D(0.5,0.75));
+        StdOut.printf("size E = %d \n", initial.size());
+        initial.insert(new Point2D(0.625,0.25));
+        StdOut.printf("size F = %d \n", initial.size());
+        initial.insert(new Point2D(0.0,0.375));
+        StdOut.printf("size G = %d \n", initial.size());
+        initial.insert(new Point2D(0.875,0.5));
+        StdOut.printf("size H = %d \n", initial.size());
+        initial.insert(new Point2D(0.375,0.125));
+        StdOut.printf("size I = %d \n", initial.size());
+        initial.insert(new Point2D(0.375,0.125));
+        StdOut.printf("size J = %d \n", initial.size());
     }
 }
