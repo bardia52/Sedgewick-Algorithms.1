@@ -14,17 +14,16 @@ import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Queue;
-import java.lang.Double;
 
 public class KdTree {
     private int numPoints;
     private KdTreeNode root;
 
     private class KdTreeNode implements Comparable<KdTreeNode> {
-        private boolean isXAxis;
-        private Point2D point;
         KdTreeNode left;
         KdTreeNode right;
+        private final boolean isXAxis;
+        private final Point2D point;
 
         public KdTreeNode(Point2D p, boolean xAxis) {
             this.isXAxis = xAxis;
@@ -35,14 +34,10 @@ public class KdTree {
 
         public int compareTo(KdTreeNode that) {
             if (isXAxis) {
-                if (this.point.x() < that.point.x()) return -1;
-                else if (this.point.x() > that.point.x()) return +1;
-                else return 0;
+                return Double.compare(this.point.x(), that.point.x());
             }
             else {
-                if (this.point.y() < that.point.y()) return -1;
-                else if (this.point.y() > that.point.y()) return +1;
-                else return 0;
+                return  Double.compare(this.point.y(), that.point.y());
             }
         }
     }
@@ -68,7 +63,7 @@ public class KdTree {
     public void insert(Point2D p) {
         if (p == null)
             throw new IllegalArgumentException("Null Entry");
-        if ((p != null) && !contains(p)) {
+        else if (!contains(p)) {
             root = insert(root, p, true);
             numPoints++;
         }
@@ -76,7 +71,7 @@ public class KdTree {
 
     private KdTreeNode insert(KdTreeNode node, Point2D p, boolean isXAxis) {
         if (node == null) {
-            KdTreeNode newNode = new KdTreeNode(p,isXAxis);
+            KdTreeNode newNode = new KdTreeNode(p, isXAxis);
             return newNode;
         }
         else if (isXAxis) {
@@ -203,7 +198,7 @@ public class KdTree {
         if (query == null)
             throw new IllegalArgumentException("Null Entry");
         if (root == null)
-            throw new IllegalArgumentException("Null Tree");
+            return null;
         return nearest(root, query, null);
     }
 
@@ -266,10 +261,10 @@ public class KdTree {
                         closestPoint = nearest(node.right, query, closestPoint);
                 }
                 else {
-                    if (node.left != null)
-                        closestPoint = nearest(node.left, query, closestPoint);
                     if (node.right != null)
                         closestPoint = nearest(node.right, query, closestPoint);
+                    if (node.left != null)
+                        closestPoint = nearest(node.left, query, closestPoint);
                 }
             }
         }
