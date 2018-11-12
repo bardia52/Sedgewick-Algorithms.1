@@ -66,6 +66,8 @@ public class KdTree {
     // add the point to the set (if it is not already in the set)
     /// @Todo: Fill this
     public void insert(Point2D p) {
+        if (p == null)
+            throw new IllegalArgumentException("Null Entry");
         if ((p != null) && !contains(p)) {
             root = insert(root, p, true);
             numPoints++;
@@ -99,6 +101,8 @@ public class KdTree {
     // does the set contain point p?
     /// @Todo: Fill this
     public boolean contains(Point2D p) {
+        if (p == null)
+            throw new IllegalArgumentException("Null Entry");
         return contains(root, p, true);
     }
 
@@ -156,6 +160,8 @@ public class KdTree {
 
     // all points that are inside the rectangle (or on the boundary)
     public Iterable<Point2D> range(RectHV rect) {
+        if (rect == null)
+            throw new IllegalArgumentException("Null Entry");
         return range(root, rect);
     }
 
@@ -193,8 +199,81 @@ public class KdTree {
 
     // a nearest neighbor in the set to point p; null if the set is empty
     /// @Todo: Fill this
-    public Point2D nearest(Point2D p) {
-        return p;
+    public Point2D nearest(Point2D query) {
+        if (query == null)
+            throw new IllegalArgumentException("Null Entry");
+        if (root == null)
+            throw new IllegalArgumentException("Null Tree");
+        return nearest(root, query, null);
+    }
+
+    private Point2D nearest(KdTreeNode node, Point2D query, Point2D currentBestPoint) {
+        Point2D closestPoint = null;
+        if (currentBestPoint == null) {
+            closestPoint = node.point;
+        }
+        else if (node.point.distanceTo(query) < currentBestPoint.distanceTo(query)) {
+            closestPoint = node.point;
+        }
+        else {
+            closestPoint = currentBestPoint;
+        }
+        double shortestDistance = closestPoint.distanceTo(query);
+        if (node.isXAxis) {
+            if ((query.x() + shortestDistance < node.point.x()) && (node.left != null)) {
+                // Look at left rectangle only
+                closestPoint = nearest(node.left, query, closestPoint);
+            }
+            else if ((query.x() - shortestDistance > node.point.x()) && (node.right != null)) {
+                // Look at right rectangle only
+                closestPoint = nearest(node.right, query, closestPoint);
+            }
+            else {
+                // Look at both left and right rectangle
+                // Look at the first point that is on the same side of query point
+                if (query.x() < node.point.x()) {
+                    if (node.left != null)
+                        closestPoint = nearest(node.left, query, closestPoint);
+                    if (node.right != null)
+                        closestPoint = nearest(node.right, query, closestPoint);
+                }
+                else {
+                    if (node.right != null)
+                        closestPoint = nearest(node.right, query, closestPoint);
+                    if (node.left != null)
+                        closestPoint = nearest(node.left, query, closestPoint);
+                }
+            }
+        }
+        else {
+            if ((query.y() + shortestDistance < node.point.y()) && (node.left != null)) {
+                // Don't worry about right rectangle
+                // Look at left rectangle
+                closestPoint = nearest(node.left, query, closestPoint);
+            }
+            else if ((query.y() - shortestDistance > node.point.y()) && (node.right != null)) {
+                // Don't worry about left rectangle
+                // Look at right rectangle
+                closestPoint = nearest(node.right, query, closestPoint);
+            }
+            else {
+                // Look at both left and right rectangle
+                // Look at the first point that is on the same side of query point
+                if (query.y() < node.point.y()) {
+                    if (node.left != null)
+                        closestPoint = nearest(node.left, query, closestPoint);
+                    if (node.right != null)
+                        closestPoint = nearest(node.right, query, closestPoint);
+                }
+                else {
+                    if (node.left != null)
+                        closestPoint = nearest(node.left, query, closestPoint);
+                    if (node.right != null)
+                        closestPoint = nearest(node.right, query, closestPoint);
+                }
+            }
+        }
+        return closestPoint;
     }
 
     // unit testing of the methods (optional)
@@ -233,7 +312,11 @@ public class KdTree {
         StdOut.printf("size D = %d \n", myTree.size());
         myTree.insert(new Point2D(0.9, 0.6));
         StdOut.printf("size E = %d \n", myTree.size());
+        StdOut.printf("Range for [0.378, 0.69] x [0.667, 0.958]: %s\n", myTree.range(new RectHV(0.378, 0.39, 0.667, 0.958)));
+        StdOut.printf("Nearest query point (0.74, 0.87): %s\n", myTree.nearest(new Point2D(0.74, 0.87)));
 
-        StdOut.printf("Range for [0.378, 0.69] x [0.667, 0.958]: %s", myTree.range(new RectHV(0.378, 0.39, 0.667, 0.958)));
+//        myTree.insert(new Point2D(0.5, 0.5));
+//        StdOut.printf("size A = %d \n", myTree.size());
+//        StdOut.printf("Nearest query point (0.037, 0.035): %s\n", myTree.nearest(new Point2D(0.037, 0.035)));
     }
 }
